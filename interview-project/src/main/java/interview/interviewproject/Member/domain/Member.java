@@ -4,6 +4,7 @@ import interview.interviewproject.Common.domain.BaseTimeEntity;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -23,26 +24,13 @@ public class Member extends BaseTimeEntity {
     private String email;
 
     @Column(name = "birth_date")
-    private String birthDate;
+    private LocalDate birthDate;
 
     @Enumerated(value = EnumType.STRING)
     private GenderType gender;
 
-    private String language;
+    private String phoneNum;
 
-    private String school;
-
-    private Double grades;
-
-    private String major;
-
-    private Boolean intern;
-
-    private String contest;
-
-    @Column(name = "project_num")
-    private Integer projectNum;
-
-    private String job;
+    private String memberName;
 
 }

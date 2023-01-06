@@ -2,6 +2,7 @@ package interview.interviewproject.Member.repository;
 
 import interview.interviewproject.Member.domain.Member;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,7 @@ public class MemberRepository {
     }
     // 프론트단에서 중복체크를 안했을 시에 회원가입버튼을 동작시키지 못하게 막아야하는지 확인바람
 
+    @Transactional
     public void create_member(Member member) {
         em.persist(member);
     }
