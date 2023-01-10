@@ -1,30 +1,18 @@
 package interview.interviewproject.Member.domain;
 
-import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
 
 @Getter
-public class MemberDTO {
-
-    @Getter
-    @Builder
-    public static class Request {
+public class MemberRequestDTO {
 
         private String nickname;
-        private String memberName;
+        private String username;
+        private String phoneNumber;
         private String userId;
         private String password;
-        private LocalDate birthDate;
         private String email;
+        private LocalDate birthDate;
         private GenderType gender;
-        private String phoneNum;
-
-    }
-
-    public static class Response{
-
-    }
-
 }

@@ -14,7 +14,17 @@ public class Member extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "detail_id")
+    private MemberDetail memberDetail;
+
     private String nickname;
+
+    @Column(name = "user_name")
+    private String username;
+
+    @Column(name = "phone_number")
+    private long phoneNumber;
 
     @Column(name = "user_id")
     private String userId;
@@ -28,9 +38,4 @@ public class Member extends BaseTimeEntity {
 
     @Enumerated(value = EnumType.STRING)
     private GenderType gender;
-
-    private String phoneNum;
-
-    private String memberName;
-
 }
