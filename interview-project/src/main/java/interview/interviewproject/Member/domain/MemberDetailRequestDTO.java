@@ -15,4 +15,17 @@ public class MemberDetailRequestDTO {
         private String major;
         private int intern;
         private String job;
+        private String username;
+
+        public static MemberDetail toEntity(MemberDetailRequestDTO requestDTO) {
+
+                return MemberDetail.builder()
+                        .school(requestDTO.getSchool())
+                        .grades(requestDTO.getGrades())
+                        .major(requestDTO.getMajor())
+                        .intern(requestDTO.getIntern())
+                        .job(requestDTO.getJob())
+                        .username(requestDTO.getUsername())
+                        .build();
+        }
 }

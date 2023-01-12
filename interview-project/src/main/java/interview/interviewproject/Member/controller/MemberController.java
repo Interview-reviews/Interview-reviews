@@ -23,15 +23,15 @@ public class MemberController {
         return !memberService.nicknameCheck(nickname);
     }
 
-    //아이디 중복확인
-    @GetMapping(value = "/check-userid")
-    public boolean checkUserId(@RequestParam String userId) {
-        //중복시에 false로 반환
-        return !memberService.userIdCheck(userId);
-    }
+    //아이디 중복확인 ---> username 으로 변경해야될꺼 같습니다.
+//    @GetMapping(value = "/check-userid")
+//    public boolean checkUserId(@RequestParam String userId) {
+//        //중복시에 false로 반환
+//        return !memberService.userIdCheck(userId);
+//    }
 
     //회원가입-회원정보
-    @PostMapping(value = "")
+    @PostMapping()
     public void create_member(@RequestBody MemberRequestDTO memberRequestDTO) {
         memberService.join(memberRequestDTO);
     }

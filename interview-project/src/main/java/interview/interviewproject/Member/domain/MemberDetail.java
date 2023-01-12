@@ -1,11 +1,17 @@
 package interview.interviewproject.Member.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberDetail {
 
     @Id
@@ -26,4 +32,6 @@ public class MemberDetail {
     private int intern;
 
     private String job; //직무
+
+    private String username;
 }

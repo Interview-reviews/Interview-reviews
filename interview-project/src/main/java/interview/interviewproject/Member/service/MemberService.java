@@ -5,23 +5,23 @@ import interview.interviewproject.Member.domain.MemberDetail;
 import interview.interviewproject.Member.domain.MemberRequestDTO;
 import interview.interviewproject.Member.repository.MemberDetailRepository;
 import interview.interviewproject.Member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
-
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     public boolean nicknameCheck(String nickname) {
         return memberRepository.existsByNickname(nickname);
     }
 
-    public boolean userIdCheck(String userId) {
-        return memberRepository.existsByUserId(userId);
-    }
 
-    public void join(MemberRequestDTO member) {
+    public void join(MemberRequestDTO requestDTO) {
+        Member member = MemberRequestDTO.toEntity(requestDTO);
         memberRepository.save(member);
     }
 }
