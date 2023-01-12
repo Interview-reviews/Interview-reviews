@@ -1,6 +1,7 @@
 package interview.interviewproject.Member.domain;
 
 import interview.interviewproject.Common.domain.BaseTimeEntity;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Getter
+@Builder
 public class Member extends BaseTimeEntity {
 
     @Id

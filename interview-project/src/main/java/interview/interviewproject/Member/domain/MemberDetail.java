@@ -1,11 +1,13 @@
 package interview.interviewproject.Member.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
 public class MemberDetail {
 
     @Id
@@ -15,7 +17,9 @@ public class MemberDetail {
 
     @OneToOne
     @JoinColumn(name = "language_id")
-    private DetailLanguage detailLanguage;
+    private MemberLanguage memberLanguage;
+
+    private String graduate;
 
     private String school;
 
@@ -26,4 +30,6 @@ public class MemberDetail {
     private int intern;
 
     private String job; //직무
+
+
 }

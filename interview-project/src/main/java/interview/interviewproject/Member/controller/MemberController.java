@@ -8,6 +8,8 @@ import interview.interviewproject.Member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/member")
@@ -39,6 +41,9 @@ public class MemberController {
     //회원가입-스펙정보
     @PostMapping(value = "/detail")
     public void create_detailMember(@RequestBody MemberDetailRequestDTO memberDetailRequestDTO) {
-        memberDetailService.join_detail(memberDetailRequestDTO);
+        List<List<String>> language = memberDetailRequestDTO.getLanguage();
+        for (int i=0; i<language.size(); i++) {
+            List<String> strings = memberDetailRequestDTO.getLanguage().get(i);
+        }
     }
 }

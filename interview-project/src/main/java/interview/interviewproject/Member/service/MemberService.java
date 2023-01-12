@@ -8,8 +8,14 @@ import interview.interviewproject.Member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 @Service
 public class MemberService {
+
+    @PersistenceContext
+    private EntityManager em;
 
     private MemberRepository memberRepository;
 
@@ -21,7 +27,8 @@ public class MemberService {
         return memberRepository.existsByUserId(userId);
     }
 
-    public void join(MemberRequestDTO member) {
-        memberRepository.save(member);
+    public void join(MemberRequestDTO memberRequestDTO) {
+        Member member = memberRequestDTO.toEntity();
+        em.persist(member);
     }
 }
