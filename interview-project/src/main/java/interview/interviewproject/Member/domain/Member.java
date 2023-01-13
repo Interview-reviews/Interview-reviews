@@ -1,8 +1,10 @@
 package interview.interviewproject.Member.domain;
 
 import interview.interviewproject.Common.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,6 +12,8 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member extends BaseTimeEntity {
 
     @Id
@@ -26,10 +30,7 @@ public class Member extends BaseTimeEntity {
     private String username;
 
     @Column(name = "phone_number")
-    private long phoneNumber;
-
-    @Column(name = "user_id")
-    private String userId;
+    private String phoneNumber;
 
     private String password;
 
@@ -40,4 +41,6 @@ public class Member extends BaseTimeEntity {
 
     @Enumerated(value = EnumType.STRING)
     private GenderType gender;
+
+    private String role;
 }

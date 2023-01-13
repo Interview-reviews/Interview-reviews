@@ -4,6 +4,8 @@ import interview.interviewproject.Member.domain.MemberDetail;
 import interview.interviewproject.Member.domain.MemberDetailRequestDTO;
 import interview.interviewproject.Member.domain.MemberLanguage;
 import interview.interviewproject.Member.repository.MemberDetailRepository;
+import interview.interviewproject.Member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import interview.interviewproject.Member.repository.MemberLanguageRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,22 +16,14 @@ import java.util.HashMap;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class MemberDetailService {
 
-    @PersistenceContext
-    private EntityManager em;
-
-    private MemberDetailRepository memberDetailRepository;
-    private MemberLanguageRepository memberLanguageRepository;
-
+    private final MemberDetailRepository memberDetailRepository;
 
 
     public void join_detail(MemberDetailRequestDTO memberDetailRequestDTO) {
-        List<List<String>> language = memberDetailRequestDTO.getLanguage();
-        for (List<String> s : language) {
-            em.persist(s);
-        }
-        MemberDetail memberDetail = memberDetailRequestDTO.toEntity();
-        em.persist(memberDetail);
+        MemberDetail memberDetail = MemberDetailRequestDTO.toEntity(memberDetailRequestDTO);
+        memberDetailRepository.save(memberDetail);
     }
 }
