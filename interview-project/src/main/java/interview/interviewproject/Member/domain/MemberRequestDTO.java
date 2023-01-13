@@ -18,7 +18,7 @@ public class MemberRequestDTO {
         private LocalDate birthDate;
         private GenderType gender;
 
-        public Member toEntity() {
+        public  Member toEntity() {
                 return Member.builder()
                         .nickname(nickname)
                         .username(username)

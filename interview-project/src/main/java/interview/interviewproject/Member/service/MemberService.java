@@ -5,6 +5,7 @@ import interview.interviewproject.Member.domain.MemberDetail;
 import interview.interviewproject.Member.domain.MemberRequestDTO;
 import interview.interviewproject.Member.repository.MemberDetailRepository;
 import interview.interviewproject.Member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
 
     @PersistenceContext
