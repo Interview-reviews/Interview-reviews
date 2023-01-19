@@ -1,8 +1,15 @@
 package interview.interviewproject.Community.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommunityTag {
 
     @Id
@@ -14,5 +21,9 @@ public class CommunityTag {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "community_id")
     private Community community;
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
 
 }
