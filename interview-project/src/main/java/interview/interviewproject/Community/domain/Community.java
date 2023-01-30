@@ -1,5 +1,6 @@
 package interview.interviewproject.Community.domain;
 
+import interview.interviewproject.Common.domain.BaseTimeEntity;
 import interview.interviewproject.Member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Community {
+public class Community extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
