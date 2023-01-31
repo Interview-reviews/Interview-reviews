@@ -6,10 +6,8 @@ import interview.interviewproject.Community.domain.CommunityTag;
 import interview.interviewproject.Community.service.CommunityService;
 import interview.interviewproject.Member.domain.Member;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,5 +18,11 @@ public class CommunityController {
     @PostMapping()
     public void createCommunity(@LoginMember Member member , @RequestBody CommunityDTO.Request request) {
         communityService.createCommunity(member.getUsername() , request);
+    }
+
+    @PostMapping("/test")
+    @ResponseStatus(HttpStatus.OK)
+    public void test(@LoginMember Member member , @RequestBody CommunityDTO.Request request){
+        System.out.println("request = " + request);
     }
 }
