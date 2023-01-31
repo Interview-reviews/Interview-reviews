@@ -11,7 +11,7 @@ import java.util.List;
 public class MemberDetailRequestDTO {
 
 
-        private List<List<String>> language;
+        private List<MemberLanguageDTO> language;
         private String graduate;
         private String school;
         private Double grades;

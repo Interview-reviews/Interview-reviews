@@ -22,6 +22,9 @@ public class MemberService {
         return memberRepository.existsByNickname(nickname);
     }
 
+    public boolean userNameCheck(String username) {
+        return memberRepository.existsByUsername(username);
+    }
 
     public void join(MemberRequestDTO requestDTO) {
         Member member = MemberRequestDTO.toEntity(requestDTO);

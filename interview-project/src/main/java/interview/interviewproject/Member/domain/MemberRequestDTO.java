@@ -11,7 +11,6 @@ import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 public class MemberRequestDTO {
 
@@ -19,8 +18,7 @@ public class MemberRequestDTO {
 
         private String nickname;
         private String username;
-        private Long phoneNumber;
-        private String userId;
+        private String phoneNumber;
         private String password;
         private String email;
         private LocalDate birthDate;

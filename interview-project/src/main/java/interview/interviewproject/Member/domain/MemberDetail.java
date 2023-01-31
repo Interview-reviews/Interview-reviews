@@ -21,7 +21,7 @@ public class MemberDetail {
 
     @OneToOne
     @JoinColumn(name = "language_id")
-    private DetailLanguage detailLanguage;
+    private MemberLanguage memberLanguage;
 
     private String school;
 

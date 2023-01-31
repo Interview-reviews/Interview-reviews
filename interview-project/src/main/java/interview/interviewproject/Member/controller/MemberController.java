@@ -1,14 +1,12 @@
 package interview.interviewproject.Member.controller;
 
-import interview.interviewproject.Member.domain.MemberDetail;
-import interview.interviewproject.Member.domain.MemberDetailRequestDTO;
-import interview.interviewproject.Member.domain.MemberRequestDTO;
+import interview.interviewproject.Member.domain.*;
 import interview.interviewproject.Member.service.MemberDetailService;
 import interview.interviewproject.Member.service.MemberService;
+import interview.interviewproject.Member.service.emailservice.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,6 +15,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final MemberDetailService memberDetailService;
+    private final EmailService emailService;
 
     //닉네임 중복확인
     @GetMapping(value = "/check-nickname")
@@ -25,15 +24,13 @@ public class MemberController {
         return !memberService.nicknameCheck(nickname);
     }
 
-    //아이디 중복확인 ---> username 으로 변경해야될꺼 같습니다.
-//    @GetMapping(value = "/check-userid")
-//    public boolean checkUserId(@RequestParam String userId) {
-//        //중복시에 false로 반환
-//        return !memberService.userIdCheck(userId);
-//    }
+    @GetMapping(value = "/check-username")
+    public boolean checkUserId(@RequestParam String username) {
+        return memberService.userNameCheck(username);
+    }
 
     //회원가입-회원정보
-    @PostMapping()
+    @PostMapping(value = "/join")
     public void create_member(@RequestBody MemberRequestDTO memberRequestDTO) {
         memberService.join(memberRequestDTO);
     }
@@ -41,9 +38,25 @@ public class MemberController {
     //회원가입-스펙정보
     @PostMapping(value = "/detail")
     public void create_detailMember(@RequestBody MemberDetailRequestDTO memberDetailRequestDTO) {
-        List<List<String>> language = memberDetailRequestDTO.getLanguage();
-        for (int i=0; i<language.size(); i++) {
-            List<String> strings = memberDetailRequestDTO.getLanguage().get(i);
-        }
+
+    }
+
+    // 이메일 인증
+    @PostMapping(value = "/emailConfirm")
+    public String emailConfirm(@RequestParam String email) throws Exception {
+
+        return emailService.memberJoin(email);
+    }
+
+    // 아이디 찾기
+    @GetMapping(value = "find-username")
+    public MemberFindUsernameDTO findUserName(@RequestParam String email) throws  Exception {
+        return emailService.findUserName(email);
+    }
+
+    // 비밀번호 찾기
+    @GetMapping(value = "find-password")
+    public MemberFindPw findPw(@RequestParam String email) throws Exception {
+        return emailService.findPw(email);
     }
 }

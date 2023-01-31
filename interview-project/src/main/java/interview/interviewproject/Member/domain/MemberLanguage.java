@@ -12,6 +12,8 @@ public class MemberLanguage {
     @Column(name = "language_id")
     private Long id;
 
+    private String username;
+
     private String language;
 
     @Column(name = "lanuage_score")
