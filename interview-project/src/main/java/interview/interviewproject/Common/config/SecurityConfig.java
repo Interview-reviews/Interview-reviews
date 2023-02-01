@@ -58,7 +58,7 @@ public class SecurityConfig {
         return web -> {
             web.ignoring()
                     .antMatchers(
-                            "/api/v1/member/**" , "/h2-console/**"
+                            "/api/v1/member/**" , "/h2-console/**" , "/docs/**"
                             );
         };
     }
