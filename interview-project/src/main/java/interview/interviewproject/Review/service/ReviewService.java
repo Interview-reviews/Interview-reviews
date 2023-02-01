@@ -18,7 +18,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
 
     public void createPost(ReviewRequestDTO requestDTO) {
-        Review review = ReviewRequestDTO.toEntity(requestDTO);
+        Review review = requestDTO.toEntity(requestDTO);
         reviewRepository.save(review);
     }
 
@@ -31,12 +31,27 @@ public class ReviewService {
     }
 
     public List<ReviewResponseDTO> postListView() {
-        List<Review> all_review = reviewRepository.findAll();
+        List<Review> reviewList = reviewRepository.findAll();
 
         List<ReviewResponseDTO> responseDTOList = new ArrayList<>();
 
-        for(int i=0; i<all_review.size(); i++) {
-            Review review = all_review.get(i);
+        for(int i=0; i<reviewList.size(); i++) {
+            Review review = reviewList.get(i);
+            ReviewResponseDTO reviewResponseDTO = new ReviewResponseDTO();
+            ReviewResponseDTO responseDTO = ReviewResponseDTO.builder().review(review).build();
+            responseDTOList.add(i, responseDTO);
+        }
+
+        return responseDTOList;
+    }
+
+    public List<ReviewResponseDTO> search(String keyword) {
+        List<Review> reviewList = reviewRepository.findByTitleContaining(keyword);
+
+        List<ReviewResponseDTO> responseDTOList = new ArrayList<>();
+
+        for(int i=0; i<reviewList.size(); i++) {
+            Review review = reviewList.get(i);
             ReviewResponseDTO reviewResponseDTO = new ReviewResponseDTO();
             ReviewResponseDTO responseDTO = ReviewResponseDTO.builder().review(review).build();
             responseDTOList.add(i, responseDTO);

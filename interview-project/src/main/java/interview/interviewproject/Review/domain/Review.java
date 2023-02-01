@@ -2,6 +2,7 @@ package interview.interviewproject.Review.domain;
 
 
 import interview.interviewproject.Common.domain.BaseTimeEntity;
+import interview.interviewproject.Member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,7 +20,7 @@ import java.time.LocalDate;
 public class Review extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long post_id;
+    private Long id;
 
     private String company;
 
@@ -44,4 +46,12 @@ public class Review extends BaseTimeEntity {
     private String contents;
 
     private int view_num;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private Member member;
+
+    @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc") // 댓글 정렬
+    private List<ReviewComment> comments;
 }
