@@ -43,4 +43,5 @@ public class Member extends BaseTimeEntity {
     private GenderType gender;
 
     private String role;
+
 }

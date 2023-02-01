@@ -23,6 +23,8 @@ public class MemberDetail {
     @JoinColumn(name = "language_id")
     private MemberLanguage memberLanguage;
 
+    private String graduate;
+
     private String school;
 
     private Double grades;
@@ -33,5 +35,7 @@ public class MemberDetail {
 
     private String job; //직무
 
-    private String username;
+    @OneToOne
+    @JoinColumn(name = "nickname")
+    private Member member;
 }
