@@ -38,7 +38,7 @@ public class MemberController {
     //회원가입-스펙정보
     @PostMapping(value = "/detail")
     public void create_detailMember(@RequestBody MemberDetailRequestDTO memberDetailRequestDTO) {
-
+        memberDetailService.join_detail(memberDetailRequestDTO);
     }
 
     // 이메일 인증
