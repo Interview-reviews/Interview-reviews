@@ -1,7 +1,18 @@
+import org.hidetake.gradle.swagger.generator.GenerateSwaggerUI
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
+buildscript {
+	ext {
+		restdocsApiSpecVersion = '0.16.2'
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.7'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"
+	id 'org.hidetake.swagger.generator' version '2.18.2'
 }
 
 group = 'interview'
@@ -16,6 +27,20 @@ configurations {
 
 repositories {
 	mavenCentral()
+}
+
+swaggerSources {
+	sample {
+		setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
+		}
+}
+
+openapi3 {
+	   setServer("http://localhost:8080")
+	   title = "Interview-Project"
+	   description = "Interview-Project SwaggerUI."
+	   version = "0.0.1"
+	   format = "yaml"
 }
 
 dependencies {
@@ -33,8 +58,34 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation "com.epages:restdocs-api-spec-restassured:${restdocsApiSpecVersion}"
+	testImplementation 'io.rest-assured:rest-assured'
+	swaggerUI 'org.webjars:swagger-ui:4.11.1'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.withType(GenerateSwaggerUI) {
+	dependsOn 'openapi3'
+}
+
+tasks.register('copySwaggerUI', Copy) {
+	dependsOn 'generateSwaggerUISample'
+
+	def generateSwaggerUISampleTask = tasks.named('generateSwaggerUISample', GenerateSwaggerUI).get()
+
+	from("${generateSwaggerUISampleTask.outputDir}")
+	into("${project.buildDir}/resources/main/static/docs")
+}
+
+tasks.withType(BootJar) {
+	dependsOn 'copySwaggerUI'
+}
+
+swaggerSources {
+	sample {
+		setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
+	}
 }
