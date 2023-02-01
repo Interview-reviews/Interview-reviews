@@ -5,7 +5,6 @@ import interview.interviewproject.Community.domain.CommunityDTO;
 import interview.interviewproject.Community.domain.CommunityTag;
 import interview.interviewproject.Community.domain.CommunityType;
 import interview.interviewproject.common.BaseControllerTest;
-import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
