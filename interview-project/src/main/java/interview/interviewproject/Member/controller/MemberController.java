@@ -24,6 +24,7 @@ public class MemberController {
         return !memberService.nicknameCheck(nickname);
     }
 
+    // 아이디 중복확인
     @GetMapping(value = "/check-username")
     public boolean checkUserId(@RequestParam String username) {
         return memberService.userNameCheck(username);

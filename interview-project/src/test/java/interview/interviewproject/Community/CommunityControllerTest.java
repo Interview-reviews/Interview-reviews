@@ -41,7 +41,6 @@ public class CommunityControllerTest extends BaseControllerTest {
     @Test
     @DisplayName("커뮤니티 글 작성 api")
     void registerCommunity() throws JsonProcessingException {
-
         List<CommunityTag> communityTagList = new ArrayList<>();
         communityTagList.add(CommunityTag.builder().tagName("테스트 태그").build());
         communityTagList.add(CommunityTag.builder().tagName("테스트 태그2").build());

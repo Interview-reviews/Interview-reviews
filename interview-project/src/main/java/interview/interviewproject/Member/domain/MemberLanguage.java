@@ -18,9 +18,9 @@ public class MemberLanguage {
     @Column(name = "language_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "detail_id")
-    private MemberDetail memberDetail;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "detail_id")
+//    private MemberDetail memberDetail;
 
     private String language;
 

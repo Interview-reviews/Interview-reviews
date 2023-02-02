@@ -18,6 +18,7 @@ public class MemberDetailRequestDTO {
         private String major;
         private int intern;
         private String job;
+        private CareerType careerType;
         private Member member;
 
         public static MemberDetail toEntity(MemberDetailRequestDTO requestDTO) {
@@ -28,7 +29,9 @@ public class MemberDetailRequestDTO {
                         .major(requestDTO.getMajor())
                         .intern(requestDTO.getIntern())
                         .job(requestDTO.getJob())
-                        .member(requestDTO.member)
+                        .member(requestDTO.getMember())
+                        .careerType(requestDTO.getCareerType())
                         .build();
         }
+
 }
