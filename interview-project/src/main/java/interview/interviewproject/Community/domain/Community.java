@@ -20,6 +20,7 @@ public class Community extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "community_id")
     private Long id;
 
     private String title;
