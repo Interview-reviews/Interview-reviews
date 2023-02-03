@@ -3,6 +3,7 @@ package interview.interviewproject.Community;
 import com.epages.restdocs.apispec.ResourceSnippetDetails;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import interview.interviewproject.Community.domain.*;
+import interview.interviewproject.Community.repository.CommunityCommentRepository;
 import interview.interviewproject.Community.repository.CommunityLikeRepository;
 import interview.interviewproject.Community.repository.CommunityRepository;
 import interview.interviewproject.Member.domain.Member;
@@ -39,11 +40,15 @@ public class CommunityControllerTest extends BaseControllerTest {
     @Autowired
     private CommunityLikeRepository communityLikeRepository;
 
+    @Autowired
+    private CommunityCommentRepository communityCommentRepository;
+
     @BeforeEach
     void beforeClean(){
         communityRepository.deleteAll();
         memberRepository.deleteAll();
         communityLikeRepository.deleteAll();
+        communityCommentRepository.deleteAll();
     }
 
     @AfterEach
@@ -51,6 +56,7 @@ public class CommunityControllerTest extends BaseControllerTest {
         communityRepository.deleteAll();
         memberRepository.deleteAll();
         communityLikeRepository.deleteAll();
+        communityCommentRepository.deleteAll();
     }
 
     private static final Snippet REGISTER_REQUEST_FIELDS = requestFields(
@@ -68,6 +74,7 @@ public class CommunityControllerTest extends BaseControllerTest {
             fieldWithPath("[].category").type(JsonFieldType.STRING).description("카테고리"),
             fieldWithPath("[].views").type(JsonFieldType.NUMBER).description("조회수"),
             fieldWithPath("[].likes").type(JsonFieldType.NUMBER).description("좋아요 수"),
+            fieldWithPath("[].comments").type(JsonFieldType.NUMBER).description("댓글 수"),
             fieldWithPath("[].createdAt").type(JsonFieldType.STRING).description("커뮤니티 생성 날짜"),
             fieldWithPath("[].communityTagList").type(JsonFieldType.ARRAY).description("태그 목록"),
             fieldWithPath("[].communityTagList[].tagName").type(JsonFieldType.STRING).description("태그 이름")

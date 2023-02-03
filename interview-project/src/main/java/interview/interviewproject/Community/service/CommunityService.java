@@ -1,6 +1,7 @@
 package interview.interviewproject.Community.service;
 
 import interview.interviewproject.Community.domain.*;
+import interview.interviewproject.Community.repository.CommunityCommentRepository;
 import interview.interviewproject.Community.repository.CommunityLikeRepository;
 import interview.interviewproject.Community.repository.CommunityRepository;
 import interview.interviewproject.Community.repository.CommunityTagRepository;
@@ -23,6 +24,8 @@ public class CommunityService {
     private final CommunityTagRepository communityTagRepository;
 
     private final CommunityLikeRepository communityLikeRepository;
+
+    private final CommunityCommentRepository communityCommentRepository;
     public void createCommunity(String username , CommunityDTO.Request request) {
 
         Member member = memberRepository.findByUsername(username);
@@ -40,6 +43,7 @@ public class CommunityService {
         for (Community community : communities) {
 
             List<CommunityLike> communityLikeList = communityLikeRepository.findAllByCommunityId(community.getId());
+            List<CommunityComment> communityCommentList = communityCommentRepository.findAllByCommunityId(community.getId());
 
             CommunityDTO.Response response = CommunityDTO.Response.builder()
                     .nickName(community.getMember().getNickname())
@@ -48,6 +52,7 @@ public class CommunityService {
                     .category(community.getCategory())
                     .views(community.getViews())
                     .likes(communityLikeList.size())
+                    .comments(communityCommentList.size())
                     .createdAt(LocalDate.from(community.getCreatedAt()))
                     .communityTagList(new ArrayList<>())
                     .build();
