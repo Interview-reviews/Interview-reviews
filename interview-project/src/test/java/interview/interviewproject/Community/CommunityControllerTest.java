@@ -3,6 +3,7 @@ package interview.interviewproject.Community;
 import com.epages.restdocs.apispec.ResourceSnippetDetails;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import interview.interviewproject.Community.domain.*;
+import interview.interviewproject.Community.repository.CommunityLikeRepository;
 import interview.interviewproject.Community.repository.CommunityRepository;
 import interview.interviewproject.Member.domain.Member;
 import interview.interviewproject.Member.repository.MemberRepository;
@@ -35,16 +36,21 @@ public class CommunityControllerTest extends BaseControllerTest {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private CommunityLikeRepository communityLikeRepository;
+
     @BeforeEach
     void beforeClean(){
         communityRepository.deleteAll();
         memberRepository.deleteAll();
+        communityLikeRepository.deleteAll();
     }
 
     @AfterEach
     void afterClean(){
         communityRepository.deleteAll();
         memberRepository.deleteAll();
+        communityLikeRepository.deleteAll();
     }
 
     private static final Snippet REGISTER_REQUEST_FIELDS = requestFields(
@@ -61,6 +67,7 @@ public class CommunityControllerTest extends BaseControllerTest {
             fieldWithPath("[].contents").type(JsonFieldType.STRING).description("커뮤니티 내용"),
             fieldWithPath("[].category").type(JsonFieldType.STRING).description("카테고리"),
             fieldWithPath("[].views").type(JsonFieldType.NUMBER).description("조회수"),
+            fieldWithPath("[].likes").type(JsonFieldType.NUMBER).description("좋아요 수"),
             fieldWithPath("[].createdAt").type(JsonFieldType.STRING).description("커뮤니티 생성 날짜"),
             fieldWithPath("[].communityTagList").type(JsonFieldType.ARRAY).description("태그 목록"),
             fieldWithPath("[].communityTagList[].tagName").type(JsonFieldType.STRING).description("태그 이름")

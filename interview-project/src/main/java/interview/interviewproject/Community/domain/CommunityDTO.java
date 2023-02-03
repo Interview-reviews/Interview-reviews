@@ -44,6 +44,8 @@ public class CommunityDTO {
 
         private Integer views;
 
+        private Integer likes;
+
         private LocalDate createdAt;
 
         private List<CommunityTagDTO> communityTagList;
