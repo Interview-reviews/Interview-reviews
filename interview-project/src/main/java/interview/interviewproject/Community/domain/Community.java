@@ -29,6 +29,8 @@ public class Community extends BaseTimeEntity {
     @Enumerated(value = EnumType.STRING)
     private CommunityType category;
 
+    private Integer views;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -42,6 +44,7 @@ public class Community extends BaseTimeEntity {
                 .title(request.getTitle())
                 .contents(request.getContents())
                 .category(request.getCategory())
+                .views(0)
                 .communityTagList(new ArrayList<>())
                 .member(member)
                 .build();
