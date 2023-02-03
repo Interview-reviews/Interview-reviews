@@ -22,7 +22,7 @@ public class CommunityDTO {
 
         private CommunityType category;
 
-        private List<CommunityTag> communityTagList;
+        private List<CommunityTagDTO> communityTagList;
 
     }
 
