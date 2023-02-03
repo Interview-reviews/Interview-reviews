@@ -8,7 +8,7 @@ import interview.interviewproject.Review.domain.ReviewCommentRequestDTO;
 import interview.interviewproject.Review.repository.ReviewCommentRepository;
 import interview.interviewproject.Review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;3
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 

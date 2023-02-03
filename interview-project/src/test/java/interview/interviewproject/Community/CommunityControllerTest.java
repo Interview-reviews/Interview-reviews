@@ -3,6 +3,7 @@ package interview.interviewproject.Community;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import interview.interviewproject.Community.domain.CommunityDTO;
 import interview.interviewproject.Community.domain.CommunityTag;
+import interview.interviewproject.Community.domain.CommunityTagDTO;
 import interview.interviewproject.Community.domain.CommunityType;
 import interview.interviewproject.common.BaseControllerTest;
 import org.junit.jupiter.api.DisplayName;
@@ -27,10 +28,7 @@ public class CommunityControllerTest extends BaseControllerTest {
             fieldWithPath("contents").type(JsonFieldType.STRING).description("내용"),
             fieldWithPath("category").type(JsonFieldType.STRING).description("카테고리"),
             fieldWithPath("communityTagList").type(JsonFieldType.ARRAY).description("태그 목록"),
-            fieldWithPath("communityTagList[].id").type(JsonFieldType.NULL).description("태그 id"),
-            fieldWithPath("communityTagList[].tagName").type(JsonFieldType.STRING).description("태그 이름"),
-            fieldWithPath("communityTagList[].community").type(JsonFieldType.NULL).description("태그가 속한 커뮤니티")
-
+            fieldWithPath("communityTagList[].tagName").type(JsonFieldType.STRING).description("태그 이름")
     );
 
     private static final Snippet RESPONSE_FIELDS = responseFields(
@@ -42,10 +40,9 @@ public class CommunityControllerTest extends BaseControllerTest {
     @DisplayName("커뮤니티 글 작성 api")
     void registerCommunity() throws JsonProcessingException {
 
-        List<CommunityTag> communityTagList = new ArrayList<>();
-        communityTagList.add(CommunityTag.builder().tagName("테스트 태그").build());
-        communityTagList.add(CommunityTag.builder().tagName("테스트 태그2").build());
-
+        List<CommunityTagDTO> communityTagList = new ArrayList<>();
+        communityTagList.add(CommunityTagDTO.builder().tagName("테스트 태그1").build());
+        communityTagList.add(CommunityTagDTO.builder().tagName("테스트 태그2").build());
 
         CommunityDTO.Request request = CommunityDTO.Request.builder()
                 .title("테스트 제목")
