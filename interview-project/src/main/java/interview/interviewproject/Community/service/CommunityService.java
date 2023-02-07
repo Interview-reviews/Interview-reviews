@@ -46,6 +46,7 @@ public class CommunityService {
             List<CommunityComment> communityCommentList = communityCommentRepository.findAllByCommunityId(community.getId());
 
             CommunityDTO.Response response = CommunityDTO.Response.builder()
+                    .id(community.getId())
                     .nickName(community.getMember().getNickname())
                     .title(community.getTitle())
                     .contents(community.getContents())

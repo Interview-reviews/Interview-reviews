@@ -68,6 +68,7 @@ public class CommunityControllerTest extends BaseControllerTest {
     );
 
     private static final Snippet COMMUNITY_LIST_RESPONSE_FIELDS = responseFields(
+            fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("커뮤니티 id"),
             fieldWithPath("[].nickName").type(JsonFieldType.STRING).description("사용자 닉네임"),
             fieldWithPath("[].title").type(JsonFieldType.STRING).description("커뮤니티 제목"),
             fieldWithPath("[].contents").type(JsonFieldType.STRING).description("커뮤니티 내용"),
