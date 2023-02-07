@@ -34,6 +34,8 @@ public class CommunityDTO {
     @AllArgsConstructor
     public static class Response{
 
+        private Long id;
+
         private String nickName;
 
         private String title;
