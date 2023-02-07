@@ -3,6 +3,7 @@ package interview.interviewproject.Review.domain;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -19,6 +20,8 @@ public class ReviewResponseDTO {
     private String title;
     private String contents;
     private int view_num;
+    private Boolean flag; //작성자가 맞는지 확인
+    private List<ReviewCommentResponseDTO> commentResponseDTOList;
 
     @Builder
     public ReviewResponseDTO(Review review) {

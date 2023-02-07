@@ -3,6 +3,7 @@ package interview.interviewproject.Review.domain;
 
 import interview.interviewproject.Common.domain.BaseTimeEntity;
 import interview.interviewproject.Member.domain.Member;
+import interview.interviewproject.Member.domain.MemberRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,10 +49,22 @@ public class Review extends BaseTimeEntity {
     private int view_num;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "nickname")
     private Member member;
 
     @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("id asc") // 댓글 정렬
     private List<ReviewComment> comments;
+
+    public void Update(ReviewRequestDTO requestDTO) {
+        this.company = requestDTO.getCompany();
+        this.companyJob = requestDTO.getCompanyJob();
+        this.supportDate = requestDTO.getSupportDate();
+        this.interviewType = requestDTO.getInterviewType();
+        this.careerType = requestDTO.getCareerType();
+        this.interviewLevel = requestDTO.getInterviewLevel();
+        this.passingStatus = requestDTO.getPassingStatus();
+        this.title = requestDTO.getTitle();
+        this.contents = requestDTO.getContents();
+    }
 }

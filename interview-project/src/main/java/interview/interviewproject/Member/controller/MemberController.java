@@ -57,7 +57,7 @@ public class MemberController {
 
     // 비밀번호 찾기
     @GetMapping(value = "find-password")
-    public MemberFindPw findPw(@RequestParam String email) throws Exception {
+    public MemberFindPwDTO findPw(@RequestParam String email) throws Exception {
         return emailService.findPw(email);
     }
 }

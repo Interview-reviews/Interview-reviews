@@ -34,12 +34,13 @@ public class MemberDetail {
 
     private CareerType careerType; // 신입 or 경력력
 
-    @OneToOne(mappedBy = "memberdetail")
+    @OneToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @OneToMany
     @JoinColumn(name = "language_id")
-    List<MemberLanguage> memberLanguages = new ArrayList<>();
+    private List<MemberLanguage> memberLanguages = new ArrayList<>();
 
     @Builder
     public MemberDetail(String graduate, String school, Double grades, String major, int intern, String job, CareerType careerType) {

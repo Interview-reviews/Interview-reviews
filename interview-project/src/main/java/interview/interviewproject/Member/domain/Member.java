@@ -18,7 +18,8 @@ public class Member extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    @Column(name = "member_id")
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "detail_id")
