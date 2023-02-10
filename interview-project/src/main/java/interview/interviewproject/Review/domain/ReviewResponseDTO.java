@@ -20,8 +20,11 @@ public class ReviewResponseDTO {
     private String title;
     private String contents;
     private int view_num;
-    private Boolean flag; //작성자가 맞는지 확인
+    private int likes_num;
+
+    private Boolean user_flag; //작성자가 맞는지 확인
     private List<ReviewCommentResponseDTO> commentResponseDTOList;
+    private Boolean like_flag; // 작성자가 좋아요 여부
 
     @Builder
     public ReviewResponseDTO(Review review) {
@@ -35,5 +38,6 @@ public class ReviewResponseDTO {
         this.title = review.getTitle();
         this.contents = review.getContents();
         this.view_num = review.getView_num();
+        this.likes_num = review.getLikes_num();
     }
 }

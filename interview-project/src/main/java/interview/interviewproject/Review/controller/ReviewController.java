@@ -37,10 +37,29 @@ public class ReviewController {
         return reviewResponseDTO;
     }
 
-    // 후기글 리스트뷰
-    @GetMapping(value = "/post-listview") // 조회수순으로
+    // 후기글 상세페이지에서 좋아요 기능
+    @PostMapping(value = "/detail/likes")
+    public boolean post_like(Long review_id, String nickname) {
+        boolean post_like = reviewService.post_like(review_id, nickname);
+        return post_like;
+    }
+
+    // 후기글 리스트뷰(최신순)
+    @GetMapping(value = "/post-listview")
     public List<ReviewResponseDTO> postListView() {
         List<ReviewResponseDTO> responseDTOList = reviewService.postListView();
+        return responseDTOList;
+    }
+
+    // 후기글 리스트뷰(조회수순)
+    public List<ReviewResponseDTO> postListView_viewNum() {
+        List<ReviewResponseDTO> responseDTOList = reviewService.postListView_viewNum();
+        return responseDTOList;
+    }
+
+    // 후기글 리스트뷰(좋아요순)
+    public List<ReviewResponseDTO> postListView_likesNum() {
+        List<ReviewResponseDTO> responseDTOList = reviewService.postListView_likesNum();
         return responseDTOList;
     }
 
@@ -50,7 +69,6 @@ public class ReviewController {
         List<ReviewResponseDTO> responseDTOList = reviewService.search(keyword);
         return responseDTOList;
     }
-
 
     @PostMapping(value = "/{id}/comments")
     public void commentSave(@RequestBody ReviewCommentRequestDTO requestDTO, @RequestParam String nickname, @RequestParam Long post_id) {

@@ -21,6 +21,7 @@ import java.util.List;
 public class Review extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
     private Long id;
 
     private String company;
@@ -46,7 +47,11 @@ public class Review extends BaseTimeEntity {
 
     private String contents;
 
+    @Column(columnDefinition = "integer default 0", nullable = false)
     private int view_num;
+
+    @Column(columnDefinition = "integer default 0", nullable = false)
+    private int likes_num;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nickname")
