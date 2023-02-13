@@ -22,8 +22,8 @@ public class ReviewCommentService {
 
     public void commentSave(String nickname, Long id, ReviewCommentRequestDTO requestDTO) {
         Member member = memberRepository.findByNickname(nickname);
-        Optional<Review> r = reviewRepository.findById(id);
-        Review review = r.get();
+        Optional<Review> byId = reviewRepository.findById(id);
+        Review review = byId.get();
 
         requestDTO.setMember(member);
         requestDTO.setReview(review);

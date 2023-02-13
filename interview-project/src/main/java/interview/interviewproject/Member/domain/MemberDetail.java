@@ -6,10 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDetail {
@@ -18,10 +19,6 @@ public class MemberDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "detail_id")
     private Long id;
-
-    @OneToOne
-    @JoinColumn(name = "language_id")
-    private MemberLanguage memberLanguage;
 
     private String graduate;
 
@@ -35,7 +32,25 @@ public class MemberDetail {
 
     private String job; //직무
 
+    private CareerType careerType; // 신입 or 경력력
+
     @OneToOne
-    @JoinColumn(name = "nickname")
+    @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany
+    @JoinColumn(name = "language_id")
+    private List<MemberLanguage> memberLanguages = new ArrayList<>();
+
+    @Builder
+    public MemberDetail(String graduate, String school, Double grades, String major, int intern, String job, CareerType careerType) {
+        this.graduate = graduate;
+        this.school = school;
+        this.grades = grades;
+        this.major = major;
+        this.intern = intern;
+        this.job = job;
+        this.careerType = careerType;
+    }
+
 }

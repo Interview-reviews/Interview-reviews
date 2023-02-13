@@ -16,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-public class ReviewComment {
+public class ReviewComment extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

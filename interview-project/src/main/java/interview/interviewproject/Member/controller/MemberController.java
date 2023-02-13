@@ -24,6 +24,7 @@ public class MemberController {
         return !memberService.nicknameCheck(nickname);
     }
 
+    // 아이디 중복확인
     @GetMapping(value = "/check-username")
     public boolean checkUserId(@RequestParam String username) {
         return memberService.userNameCheck(username);
@@ -49,14 +50,14 @@ public class MemberController {
     }
 
     // 아이디 찾기
-    @GetMapping(value = "find-username")
+    @GetMapping(value = "/find-username")
     public MemberFindUsernameDTO findUserName(@RequestParam String email) throws  Exception {
         return emailService.findUserName(email);
     }
 
     // 비밀번호 찾기
-    @GetMapping(value = "find-password")
-    public MemberFindPw findPw(@RequestParam String email) throws Exception {
+    @GetMapping(value = "/find-password")
+    public MemberFindPwDTO findPw(@RequestParam String email) throws Exception {
         return emailService.findPw(email);
     }
 }
