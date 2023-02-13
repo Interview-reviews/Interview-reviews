@@ -20,6 +20,7 @@ public class Community extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "community_id")
     private Long id;
 
     private String title;
@@ -29,12 +30,14 @@ public class Community extends BaseTimeEntity {
     @Enumerated(value = EnumType.STRING)
     private CommunityType category;
 
+    private Integer views;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
     @OneToMany(mappedBy = "community" , cascade = CascadeType.ALL)
-    private List<CommunityTag> communityTagList = new ArrayList<>();
+    private List<CommunityTag> communityTagList;
 
     public static Community createCommunity(CommunityDTO.Request request , Member member) {
 
@@ -42,19 +45,25 @@ public class Community extends BaseTimeEntity {
                 .title(request.getTitle())
                 .contents(request.getContents())
                 .category(request.getCategory())
-                .communityTagList(request.getCommunityTagList())
+                .views(0)
+                .communityTagList(new ArrayList<>())
                 .member(member)
                 .build();
 
-        community.setCommunityTagList();
+        community.setCommunityTagList(request.getCommunityTagList());
         return community;
 
     }
 
-    private void setCommunityTagList() {
+    private void setCommunityTagList(List<CommunityTagDTO> list) {
 
-        for (CommunityTag communityTag : communityTagList) {
-            communityTag.setCommunity(this);
+        for (CommunityTagDTO communityTagDTO : list) {
+            CommunityTag communityTag = CommunityTag.builder()
+                    .tagName(communityTagDTO.getTagName())
+                    .community(this)
+                    .build();
+
+            communityTagList.add(communityTag);
         }
     }
 

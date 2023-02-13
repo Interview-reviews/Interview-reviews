@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class CommunityDTO {
@@ -22,12 +23,36 @@ public class CommunityDTO {
 
         private CommunityType category;
 
-        private List<CommunityTag> communityTagList;
+        private List<CommunityTagDTO> communityTagList;
 
     }
 
 
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Response{
+
+        private Long id;
+
+        private String nickName;
+
+        private String title;
+
+        private String contents;
+
+        private CommunityType category;
+
+        private Integer views;
+
+        private Integer likes;
+
+        private Integer comments;
+
+        private LocalDate createdAt;
+
+        private List<CommunityTagDTO> communityTagList;
 
     }
 
