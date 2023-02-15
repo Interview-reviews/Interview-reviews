@@ -23,8 +23,8 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     List<Review> findByTitleContaining(String keyword);
 
-    List<Review> findAllByOrderByView_numDesc();
-
-    List<Review> findAllByOrderByLikes_numDesc();
+//    List<Review> findAllByOrderByView_numDesc();
+//
+//    List<Review> findAllByOrderByLikes_numDesc();
 
 }

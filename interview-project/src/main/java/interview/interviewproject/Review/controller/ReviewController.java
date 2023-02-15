@@ -51,17 +51,17 @@ public class ReviewController {
         return responseDTOList;
     }
 
-    // 후기글 리스트뷰(조회수순)
-    public List<ReviewResponseDTO> postListView_viewNum() {
-        List<ReviewResponseDTO> responseDTOList = reviewService.postListView_viewNum();
-        return responseDTOList;
-    }
-
-    // 후기글 리스트뷰(좋아요순)
-    public List<ReviewResponseDTO> postListView_likesNum() {
-        List<ReviewResponseDTO> responseDTOList = reviewService.postListView_likesNum();
-        return responseDTOList;
-    }
+//     후기글 리스트뷰(조회수순)
+//    public List<ReviewResponseDTO> postListView_viewNum() {
+//        List<ReviewResponseDTO> responseDTOList = reviewService.postListView_viewNum();
+//        return responseDTOList;
+//    }
+//
+//     후기글 리스트뷰(좋아요순)
+//    public List<ReviewResponseDTO> postListView_likesNum() {
+//        List<ReviewResponseDTO> responseDTOList = reviewService.postListView_likesNum();
+//        return responseDTOList;
+//    }
 
     // 후기글 키워드 검색
     @GetMapping(value = "/keyword")
