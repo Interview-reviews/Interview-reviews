@@ -6,13 +6,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MemberFindPw { // DTO로 변경예정
+public class MemberFindPwDTO { // DTO로 변경예정
 
     private String authPw;
     private String password;
 
     @Builder
-    public MemberFindPw(String password, String authPw) {
+    public MemberFindPwDTO(String password, String authPw) {
         this.authPw = authPw;
         this.password = password;
     }

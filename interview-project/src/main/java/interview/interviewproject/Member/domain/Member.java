@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member extends BaseTimeEntity {
@@ -19,7 +19,7 @@ public class Member extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
-    private Long user_id;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "detail_id")
@@ -45,4 +45,16 @@ public class Member extends BaseTimeEntity {
 
     private String role;
 
+    @Builder
+    public Member(String nickname, String username, String phoneNumber, String password, String email,
+                  LocalDate birthDate, GenderType gender, String role) {
+        this.nickname = nickname;
+        this.username = username;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.role = role;
+    }
 }

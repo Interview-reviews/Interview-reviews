@@ -1,7 +1,7 @@
 package interview.interviewproject.Member.service.emailservice;
 
 import interview.interviewproject.Member.domain.Member;
-import interview.interviewproject.Member.domain.MemberFindPw;
+import interview.interviewproject.Member.domain.MemberFindPwDTO;
 import interview.interviewproject.Member.domain.MemberFindUsernameDTO;
 import interview.interviewproject.Member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,7 +108,7 @@ public class EmailServiceImpl implements EmailService{
     }
 
     @Override
-    public MemberFindPw findPw(String email)throws Exception {
+    public MemberFindPwDTO findPw(String email)throws Exception {
 
         Member member = memberRepository.findByEmail(email);
         String password = member.getPassword();
@@ -122,6 +122,6 @@ public class EmailServiceImpl implements EmailService{
             throw new IllegalArgumentException();
         }
 
-        return new MemberFindPw(password, ePw);
+        return new MemberFindPwDTO(password, ePw);
     }
 }
