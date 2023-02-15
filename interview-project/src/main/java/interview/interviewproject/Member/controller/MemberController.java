@@ -60,4 +60,9 @@ public class MemberController {
     public MemberFindPwDTO findPw(@RequestParam String email) throws Exception {
         return emailService.findPw(email);
     }
+
+    @GetMapping("/test")
+    public String test(){
+        return "test";
+    }
 }
