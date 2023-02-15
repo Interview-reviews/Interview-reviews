@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 public class MemberDetailRequestDTO {
 
-//        private Long id; // detail_id
+        private Long id; // detail_id
         private List<MemberLanguageDTO> language;
         private String graduate;
         private String school;
