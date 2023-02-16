@@ -22,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.restdocs.snippet.Snippet;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -81,7 +82,12 @@ public class CommunityControllerTest extends BaseControllerTest {
             fieldWithPath("[].comments").type(JsonFieldType.NUMBER).description("댓글 수"),
             fieldWithPath("[].createdAt").type(JsonFieldType.STRING).description("커뮤니티 생성 날짜"),
             fieldWithPath("[].communityTagList").type(JsonFieldType.ARRAY).description("태그 목록"),
-            fieldWithPath("[].communityTagList[].tagName").type(JsonFieldType.STRING).description("태그 이름")
+            fieldWithPath("[].communityTagList[].tagName").type(JsonFieldType.STRING).description("태그 이름"),
+            fieldWithPath("[].communityCommentList").type(JsonFieldType.ARRAY).description("댓글 목록"),
+            fieldWithPath("[].communityCommentList[].nickname").type(JsonFieldType.STRING).description("댓글 작성 사용자 닉네임"),
+            fieldWithPath("[].communityCommentList[].createAt").type(JsonFieldType.STRING).description("댓글 생성 시간"),
+            fieldWithPath("[].communityCommentList[].content").type(JsonFieldType.STRING).description("댓글 내용"),
+            fieldWithPath("[].communityCommentList[].owner").type(JsonFieldType.BOOLEAN).description("댓글 주인 여부")
 
     );
 
@@ -126,6 +132,8 @@ public class CommunityControllerTest extends BaseControllerTest {
         Member member = getMember();
 
         Community community = getCommunity(member);
+
+        createCommunityComment(member , community);
 
         String jwtTokenResponse = getJwtTokenResponse();
 
@@ -176,6 +184,39 @@ public class CommunityControllerTest extends BaseControllerTest {
 
     }
 
+    @Test
+    @DisplayName("커뮤니티 좋아요 등록하기 api")
+    void createComment() throws JsonProcessingException {
+
+        Member member = getMember();
+
+        Community community = getCommunity(member);
+
+        String jwtTokenResponse = getJwtTokenResponse();
+
+        String content = "테스트 댓글";
+
+        given(this.spec)
+                .filter(document(DEFAULT_RESTDOC_PATH)) // API 문서 관련 필터 추가
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .header("Content-type", "application/json")
+                .header(AUTHORIZATION, "Bearer " + jwtTokenResponse)
+                .body(content)
+                .log().all()
+
+                .when()
+                .post("/api/v1/community/comment/{communityId}", community.getId())
+
+
+                .then()
+                .statusCode(HttpStatus.OK.value());
+
+        List<CommunityComment> communityCommentList = communityCommentRepository.findAll();
+
+        Assertions.assertThat(communityCommentList.size()).isEqualTo(1);
+
+    }
+
     private Community getCommunity(Member member) {
         List<CommunityTagDTO> communityTagList = new ArrayList<>();
         communityTagList.add(CommunityTagDTO.builder().tagName("테스트 태그1").build());
@@ -193,6 +234,17 @@ public class CommunityControllerTest extends BaseControllerTest {
         communityRepository.save(community);
 
         return community;
+    }
+
+    private void createCommunityComment(Member member , Community community) {
+
+        CommunityComment comment = CommunityComment.builder()
+                .contents("테스트 댓글")
+                .nickName(member.getNickname())
+                .community(community)
+                .build();
+
+        communityCommentRepository.save(comment);
     }
 
     @NotNull
