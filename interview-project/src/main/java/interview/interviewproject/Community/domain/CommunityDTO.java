@@ -48,6 +48,8 @@ public class CommunityDTO {
 
         private Integer likes;
 
+        private boolean isLiked;
+
         private Integer comments;
 
         private LocalDate createdAt;

@@ -10,6 +10,7 @@ import interview.interviewproject.Member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class CommunityService {
                     .category(community.getCategory())
                     .views(community.getViews())
                     .likes(communityLikeList.size())
+                    .isLiked(community.isLiked())
                     .comments(communityCommentList.size())
                     .createdAt(LocalDate.from(community.getCreatedAt()))
                     .communityTagList(new ArrayList<>())
@@ -73,4 +75,30 @@ public class CommunityService {
         return result;
     }
 
+    @Transactional
+    public void createLike(Long memberId, Long communityId) {
+
+        Community community = communityRepository.findById(communityId).get();
+        Member member = memberRepository.findById(memberId).get();
+
+        if(community == null) {
+            throw new IllegalArgumentException("등록된 커뮤니티가 없습니다.");
+        }
+
+        CommunityLike communityLike = communityLikeRepository.findByCommunityIdAndMemberId(communityId, memberId);
+
+        if(communityLike != null) {
+            communityLikeRepository.deleteById(communityLike.getId());
+            community.setLiked(false);
+        }else {
+            CommunityLike build = CommunityLike.builder()
+                    .member(member)
+                    .community(community)
+                    .build();
+
+            communityLikeRepository.save(build);
+            community.setLiked(true);
+        }
+
+    }
 }

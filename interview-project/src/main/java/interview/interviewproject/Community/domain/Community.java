@@ -32,6 +32,8 @@ public class Community extends BaseTimeEntity {
 
     private Integer views;
 
+    private boolean isLiked;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -46,6 +48,7 @@ public class Community extends BaseTimeEntity {
                 .contents(request.getContents())
                 .category(request.getCategory())
                 .views(0)
+                .isLiked(false)
                 .communityTagList(new ArrayList<>())
                 .member(member)
                 .build();
@@ -65,6 +68,10 @@ public class Community extends BaseTimeEntity {
 
             communityTagList.add(communityTag);
         }
+    }
+
+    public void setLiked(boolean isLiked) {
+        this.isLiked = isLiked;
     }
 
 }
