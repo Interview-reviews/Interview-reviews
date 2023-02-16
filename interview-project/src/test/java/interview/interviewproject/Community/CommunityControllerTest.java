@@ -9,6 +9,7 @@ import interview.interviewproject.Community.repository.CommunityRepository;
 import interview.interviewproject.Member.domain.Member;
 import interview.interviewproject.Member.repository.MemberRepository;
 import interview.interviewproject.common.BaseControllerTest;
+import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
@@ -23,6 +24,7 @@ import org.springframework.restdocs.snippet.Snippet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.epages.restdocs.apispec.RestAssuredRestDocumentationWrapper.document;
 import static io.restassured.RestAssured.given;
@@ -45,18 +47,18 @@ public class CommunityControllerTest extends BaseControllerTest {
 
     @BeforeEach
     void beforeClean(){
+        communityCommentRepository.deleteAll();
+        communityLikeRepository.deleteAll();
         communityRepository.deleteAll();
         memberRepository.deleteAll();
-        communityLikeRepository.deleteAll();
-        communityCommentRepository.deleteAll();
     }
 
     @AfterEach
     void afterClean(){
+        communityCommentRepository.deleteAll();
+        communityLikeRepository.deleteAll();
         communityRepository.deleteAll();
         memberRepository.deleteAll();
-        communityLikeRepository.deleteAll();
-        communityCommentRepository.deleteAll();
     }
 
     private static final Snippet REGISTER_REQUEST_FIELDS = requestFields(
@@ -75,6 +77,7 @@ public class CommunityControllerTest extends BaseControllerTest {
             fieldWithPath("[].category").type(JsonFieldType.STRING).description("카테고리"),
             fieldWithPath("[].views").type(JsonFieldType.NUMBER).description("조회수"),
             fieldWithPath("[].likes").type(JsonFieldType.NUMBER).description("좋아요 수"),
+            fieldWithPath("[].liked").type(JsonFieldType.BOOLEAN).description("좋아요 값"),
             fieldWithPath("[].comments").type(JsonFieldType.NUMBER).description("댓글 수"),
             fieldWithPath("[].createdAt").type(JsonFieldType.STRING).description("커뮤니티 생성 날짜"),
             fieldWithPath("[].communityTagList").type(JsonFieldType.ARRAY).description("태그 목록"),
@@ -140,6 +143,37 @@ public class CommunityControllerTest extends BaseControllerTest {
 
                 .then()
                 .statusCode(HttpStatus.OK.value());
+    }
+
+    @Test
+    @DisplayName("커뮤니티 좋아요 등록하기 api")
+    void createLike() throws JsonProcessingException {
+
+        Member member = getMember();
+
+        Community community = getCommunity(member);
+
+        String jwtTokenResponse = getJwtTokenResponse();
+
+        given(this.spec)
+                .filter(document(DEFAULT_RESTDOC_PATH)) // API 문서 관련 필터 추가
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .header("Content-type", "application/json")
+                .header(AUTHORIZATION, "Bearer " + jwtTokenResponse)
+                .log().all()
+
+                .when()
+                .post("/api/v1/community/like/{communityId}", community.getId())
+
+
+                .then()
+                .statusCode(HttpStatus.OK.value());
+
+        Optional<Community> communityOptional = communityRepository.findById(community.getId());
+
+        Assertions.assertThat(communityOptional.get().isLiked()).isTrue();
+
+
     }
 
     private Community getCommunity(Member member) {
