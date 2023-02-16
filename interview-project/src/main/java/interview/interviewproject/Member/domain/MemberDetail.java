@@ -35,7 +35,7 @@ public class MemberDetail {
     private CareerType careerType; // 신입 or 경력력
 
     @OneToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "nickname")
     private Member member;
 
     @OneToMany
@@ -43,13 +43,14 @@ public class MemberDetail {
     private List<MemberLanguage> memberLanguages = new ArrayList<>();
 
     @Builder
-    public MemberDetail(String graduate, String school, Double grades, String major, int intern, String job, CareerType careerType) {
+    public MemberDetail(String graduate, String school, Double grades, String major, int intern, String job, Member member,CareerType careerType) {
         this.graduate = graduate;
         this.school = school;
         this.grades = grades;
         this.major = major;
         this.intern = intern;
         this.job = job;
+        this.member = member;
         this.careerType = careerType;
     }
 

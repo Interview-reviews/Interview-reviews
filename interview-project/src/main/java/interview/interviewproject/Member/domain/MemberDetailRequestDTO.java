@@ -30,6 +30,7 @@ public class MemberDetailRequestDTO {
                         .intern(requestDTO.getIntern())
                         .job(requestDTO.getJob())
                         .careerType(requestDTO.getCareerType())
+                        .member(requestDTO.member)
                         .build();
         }
 
