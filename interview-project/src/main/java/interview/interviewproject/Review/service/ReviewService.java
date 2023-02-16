@@ -126,7 +126,7 @@ public class ReviewService {
 
     // 조회수순
     public List<ReviewResponseDTO> postListView_viewNum() {
-        List<Review> reviewList = reviewRepository.findAllByOrderByView_numDesc();
+        List<Review> reviewList = reviewRepository.findAllByOrderByViewDesc();
 
         List<ReviewResponseDTO> responseDTOList = new ArrayList<>();
 
@@ -142,7 +142,7 @@ public class ReviewService {
 
     // 좋아요순
     public List<ReviewResponseDTO> postListView_likesNum() {
-        List<Review> reviewList = reviewRepository.findAllByOrderByLikes_numDesc();
+        List<Review> reviewList = reviewRepository.findAllByOrderByLikesDesc();
 
         List<ReviewResponseDTO> responseDTOList = new ArrayList<>();
 

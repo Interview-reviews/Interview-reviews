@@ -37,7 +37,7 @@ public class ReviewResponseDTO {
         this.passingStatus = review.getPassingStatus();
         this.title = review.getTitle();
         this.contents = review.getContents();
-        this.view_num = review.getView_num();
-        this.likes_num = review.getLikes_num();
+        this.view_num = review.getView();
+        this.likes_num = review.getLikes();
     }
 }
