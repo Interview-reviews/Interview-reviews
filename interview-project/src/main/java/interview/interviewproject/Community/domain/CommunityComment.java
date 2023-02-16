@@ -1,9 +1,19 @@
 package interview.interviewproject.Community.domain;
 
+import interview.interviewproject.Common.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
-public class CommunityComment {
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class CommunityComment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,5 +25,7 @@ public class CommunityComment {
     private Community community;
 
     private String contents;
+
+    private String nickName;
 
 }

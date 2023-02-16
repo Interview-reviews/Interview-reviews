@@ -56,6 +56,8 @@ public class CommunityDTO {
 
         private List<CommunityTagDTO> communityTagList;
 
+        private List<CommunityCommentDTO> communityCommentList;
+
     }
 
 }
