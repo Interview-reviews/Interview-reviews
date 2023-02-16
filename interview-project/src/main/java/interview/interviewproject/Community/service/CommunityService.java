@@ -35,7 +35,7 @@ public class CommunityService {
         communityRepository.save(community);
     }
 
-    public List<CommunityDTO.Response> getCommunityList() {
+    public List<CommunityDTO.Response> getCommunityList(String nickname) {
 
         List<CommunityDTO.Response> result = new ArrayList<>();
 
@@ -58,6 +58,7 @@ public class CommunityService {
                     .comments(communityCommentList.size())
                     .createdAt(LocalDate.from(community.getCreatedAt()))
                     .communityTagList(new ArrayList<>())
+                    .communityCommentList(new ArrayList<>())
                     .build();
 
 
@@ -66,6 +67,22 @@ public class CommunityService {
 
                 response.getCommunityTagList().add(CommunityTagDTO.builder()
                         .tagName(communityTag.getTagName()).build());
+            }
+
+            for (CommunityComment comment : communityCommentList) {
+                CommunityCommentDTO build = CommunityCommentDTO.builder()
+                        .content(comment.getContents())
+                        .nickname(comment.getNickName())
+                        .createAt(LocalDate.from(comment.getCreatedAt()))
+                        .build();
+
+                if(comment.getNickName().equals(nickname)){
+                    build.setOwner(true);
+                }else {
+                    build.setOwner(false);
+                }
+
+                response.getCommunityCommentList().add(build);
             }
 
             result.add(response);
@@ -100,5 +117,21 @@ public class CommunityService {
             community.setLiked(true);
         }
 
+    }
+
+    public void createComment(String nickname, Long communityId , String content) {
+        Community community = communityRepository.findById(communityId).get();
+
+        if(community == null) {
+            throw new IllegalArgumentException("등록된 커뮤니티가 없습니다.");
+        }
+
+        CommunityComment comment = CommunityComment.builder()
+                .community(community)
+                .nickName(nickname)
+                .contents(content)
+                .build();
+
+        communityCommentRepository.save(comment);
     }
 }
