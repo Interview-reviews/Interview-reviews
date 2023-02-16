@@ -35,6 +35,67 @@ public class CommunityService {
         communityRepository.save(community);
     }
 
+    @Transactional
+    public CommunityDTO.Response getCommunity(String nickname, Long communityId) {
+        Community community = communityRepository.findById(communityId).get();
+
+        if(community == null) {
+            throw new IllegalArgumentException("등록된 커뮤니티가 없습니다.");
+        }
+
+        community.addViews();
+
+        List<CommunityLike> communityLikeList = communityLikeRepository.findAllByCommunityId(community.getId());
+        List<CommunityComment> communityCommentList = communityCommentRepository.findAllByCommunityId(community.getId());
+
+        CommunityDTO.Response response = CommunityDTO.Response.builder()
+                .id(community.getId())
+                .nickName(community.getMember().getNickname())
+                .title(community.getTitle())
+                .contents(community.getContents())
+                .category(community.getCategory())
+                .views(community.getViews())
+                .likes(communityLikeList.size())
+                .isLiked(community.isLiked())
+                .comments(communityCommentList.size())
+                .createdAt(LocalDate.from(community.getCreatedAt()))
+                .communityTagList(new ArrayList<>())
+                .communityCommentList(new ArrayList<>())
+                .build();
+
+
+        List<CommunityTag> communityTagList = communityTagRepository.findAllByCommunityId(community.getId());
+        for (CommunityTag communityTag : communityTagList) {
+
+            response.getCommunityTagList().add(CommunityTagDTO.builder()
+                    .tagName(communityTag.getTagName()).build());
+        }
+
+        for (CommunityComment comment : communityCommentList) {
+            CommunityCommentDTO build = CommunityCommentDTO.builder()
+                    .content(comment.getContents())
+                    .nickname(comment.getNickName())
+                    .createAt(LocalDate.from(comment.getCreatedAt()))
+                    .build();
+
+            if(comment.getNickName().equals(nickname)){
+                build.setOwner(true);
+            }else {
+                build.setOwner(false);
+            }
+
+            response.getCommunityCommentList().add(build);
+        }
+
+        if(community.getMember().getNickname().equals(nickname)){
+            response.setOwner(true);
+        }else {
+            response.setOwner(false);
+        }
+
+        return response;
+    }
+
     public List<CommunityDTO.Response> getCommunityList(String nickname) {
 
         List<CommunityDTO.Response> result = new ArrayList<>();
@@ -83,6 +144,12 @@ public class CommunityService {
                 }
 
                 response.getCommunityCommentList().add(build);
+            }
+
+            if(community.getMember().getNickname().equals(nickname)){
+                response.setOwner(true);
+            }else {
+                response.setOwner(false);
             }
 
             result.add(response);

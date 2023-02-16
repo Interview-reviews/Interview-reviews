@@ -185,7 +185,7 @@ public class CommunityControllerTest extends BaseControllerTest {
     }
 
     @Test
-    @DisplayName("커뮤니티 좋아요 등록하기 api")
+    @DisplayName("커뮤니티 댓글 등록하기 api")
     void createComment() throws JsonProcessingException {
 
         Member member = getMember();

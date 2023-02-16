@@ -74,4 +74,8 @@ public class Community extends BaseTimeEntity {
         this.isLiked = isLiked;
     }
 
+    public void addViews() {
+        this.views++;
+    }
+
 }
