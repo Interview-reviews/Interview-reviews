@@ -9,4 +9,6 @@ public interface CommunityLikeRepository extends JpaRepository<CommunityLike , L
 
     List<CommunityLike> findAllByCommunityId(Long communityId);
 
+    CommunityLike findByCommunityIdAndMemberId(Long communityId , Long memberId);
+
 }

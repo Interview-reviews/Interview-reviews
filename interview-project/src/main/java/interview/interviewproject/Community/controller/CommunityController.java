@@ -28,6 +28,11 @@ public class CommunityController {
         return communityService.getCommunityList();
     }
 
+    @PostMapping("/like/{communityId}")
+    public void createLike(@LoginMember Member member , @PathVariable Long communityId) {
+        communityService.createLike(member.getId() , communityId);
+    }
+
     @PostMapping("/test")
     @ResponseStatus(HttpStatus.OK)
     public void test(@LoginMember Member member , @RequestBody CommunityDTO.Request request){
