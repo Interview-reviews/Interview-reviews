@@ -80,14 +80,14 @@ public class CommunityControllerTest extends BaseControllerTest {
             fieldWithPath("[].likes").type(JsonFieldType.NUMBER).description("좋아요 수"),
             fieldWithPath("[].liked").type(JsonFieldType.BOOLEAN).description("좋아요 값"),
             fieldWithPath("[].comments").type(JsonFieldType.NUMBER).description("댓글 수"),
-            fieldWithPath("[].createdAt").type(JsonFieldType.STRING).description("커뮤니티 생성 날짜"),
+            fieldWithPath("[].createdAt").type(JsonFieldType.ARRAY).description("커뮤니티 생성 날짜"),
             fieldWithPath("[].careerType").type(JsonFieldType.NULL).description("커뮤니티 작성자 경력 여부"),
             fieldWithPath("[].owner").type(JsonFieldType.BOOLEAN).description("커뮤니티 글 주인 여부"),
             fieldWithPath("[].communityTagList").type(JsonFieldType.ARRAY).description("태그 목록"),
             fieldWithPath("[].communityTagList[].tagName").type(JsonFieldType.STRING).description("태그 이름"),
             fieldWithPath("[].communityCommentList").type(JsonFieldType.ARRAY).description("댓글 목록"),
             fieldWithPath("[].communityCommentList[].nickname").type(JsonFieldType.STRING).description("댓글 작성 사용자 닉네임"),
-            fieldWithPath("[].communityCommentList[].createAt").type(JsonFieldType.STRING).description("댓글 생성 시간"),
+            fieldWithPath("[].communityCommentList[].createAt").type(JsonFieldType.ARRAY).description("댓글 생성 시간"),
             fieldWithPath("[].communityCommentList[].content").type(JsonFieldType.STRING).description("댓글 내용"),
             fieldWithPath("[].communityCommentList[].owner").type(JsonFieldType.BOOLEAN).description("댓글 주인 여부")
 
@@ -103,14 +103,14 @@ public class CommunityControllerTest extends BaseControllerTest {
             fieldWithPath("likes").type(JsonFieldType.NUMBER).description("좋아요 수"),
             fieldWithPath("liked").type(JsonFieldType.BOOLEAN).description("좋아요 값"),
             fieldWithPath("comments").type(JsonFieldType.NUMBER).description("댓글 수"),
-            fieldWithPath("createdAt").type(JsonFieldType.STRING).description("커뮤니티 생성 날짜"),
+            fieldWithPath("createdAt").type(JsonFieldType.ARRAY).description("커뮤니티 생성 날짜"),
             fieldWithPath("careerType").type(JsonFieldType.NULL).description("커뮤니티 작성자 경력 여부"),
             fieldWithPath("owner").type(JsonFieldType.BOOLEAN).description("커뮤니티 글 주인 여부"),
             fieldWithPath("communityTagList").type(JsonFieldType.ARRAY).description("태그 목록"),
             fieldWithPath("communityTagList[].tagName").type(JsonFieldType.STRING).description("태그 이름"),
             fieldWithPath("communityCommentList").type(JsonFieldType.ARRAY).description("댓글 목록"),
             fieldWithPath("communityCommentList[].nickname").type(JsonFieldType.STRING).description("댓글 작성 사용자 닉네임"),
-            fieldWithPath("communityCommentList[].createAt").type(JsonFieldType.STRING).description("댓글 생성 시간"),
+            fieldWithPath("communityCommentList[].createAt").type(JsonFieldType.ARRAY).description("댓글 생성 시간"),
             fieldWithPath("communityCommentList[].content").type(JsonFieldType.STRING).description("댓글 내용"),
             fieldWithPath("communityCommentList[].owner").type(JsonFieldType.BOOLEAN).description("댓글 주인 여부")
 
