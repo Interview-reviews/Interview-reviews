@@ -51,17 +51,17 @@ public class ReviewController {
         return responseDTOList;
     }
 
-    // 후기글 리스트뷰(조회수순)
-    public List<ReviewResponseDTO> postListView_viewNum() {
-        List<ReviewResponseDTO> responseDTOList = reviewService.postListView_viewNum();
-        return responseDTOList;
-    }
-
-    // 후기글 리스트뷰(좋아요순)
-    public List<ReviewResponseDTO> postListView_likesNum() {
-        List<ReviewResponseDTO> responseDTOList = reviewService.postListView_likesNum();
-        return responseDTOList;
-    }
+//     후기글 리스트뷰(조회수순)
+//    public List<ReviewResponseDTO> postListView_viewNum() {
+//        List<ReviewResponseDTO> responseDTOList = reviewService.postListView_viewNum();
+//        return responseDTOList;
+//    }
+//
+//     후기글 리스트뷰(좋아요순)
+//    public List<ReviewResponseDTO> postListView_likesNum() {
+//        List<ReviewResponseDTO> responseDTOList = reviewService.postListView_likesNum();
+//        return responseDTOList;
+//    }
 
     // 후기글 키워드 검색
     @GetMapping(value = "/keyword")
@@ -70,6 +70,7 @@ public class ReviewController {
         return responseDTOList;
     }
 
+    // 댓글 작성
     @PostMapping(value = "/{id}/comments")
     public void commentSave(@RequestBody ReviewCommentRequestDTO requestDTO, @RequestParam String nickname, @RequestParam Long post_id) {
         commentService.commentSave(nickname, post_id, requestDTO);

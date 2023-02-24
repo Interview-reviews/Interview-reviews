@@ -32,14 +32,14 @@ public class MemberController {
 
     //회원가입-회원정보
     @PostMapping(value = "/join")
-    public void create_member(@RequestBody MemberRequestDTO memberRequestDTO) {
-        memberService.join(memberRequestDTO);
+    public void create_member(@RequestBody MemberDTO.Request request) {
+        memberService.createMember(request);
     }
 
     //회원가입-스펙정보
     @PostMapping(value = "/detail")
-    public void create_detailMember(@RequestBody MemberDetailRequestDTO memberDetailRequestDTO) {
-        memberDetailService.join_detail(memberDetailRequestDTO);
+    public void create_detailMember(@RequestBody MemberDetailDTO.Request request, @RequestParam String nickname) {
+        memberDetailService.join_detail(request, nickname);
     }
 
     // 이메일 인증
@@ -59,5 +59,10 @@ public class MemberController {
     @GetMapping(value = "/find-password")
     public MemberFindPwDTO findPw(@RequestParam String email) throws Exception {
         return emailService.findPw(email);
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "test";
     }
 }

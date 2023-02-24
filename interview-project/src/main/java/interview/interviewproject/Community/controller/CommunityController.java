@@ -25,7 +25,23 @@ public class CommunityController {
 
     @GetMapping()
     public List<CommunityDTO.Response> getCommunityList(@LoginMember Member member) {
-        return communityService.getCommunityList();
+        return communityService.getCommunityList(member.getNickname());
+    }
+
+    @GetMapping("/{communityId}")
+    public CommunityDTO.Response getCommunity(@LoginMember Member member , @PathVariable Long communityId) {
+        return communityService.getCommunity(member.getNickname() , communityId);
+    }
+
+
+    @PostMapping("/like/{communityId}")
+    public void createLike(@LoginMember Member member , @PathVariable Long communityId) {
+        communityService.createLike(member.getId() , communityId);
+    }
+
+    @PostMapping("/comment/{communityId}")
+    public void createComment(@LoginMember Member member , @PathVariable Long communityId , @RequestBody String content) {
+        communityService.createComment(member.getNickname() , communityId , content);
     }
 
     @PostMapping("/test")

@@ -124,37 +124,37 @@ public class ReviewService {
         return responseDTOList;
     }
 
-    // 조회수순
-    public List<ReviewResponseDTO> postListView_viewNum() {
-        List<Review> reviewList = reviewRepository.findAllByOrderByViewDesc();
-
-        List<ReviewResponseDTO> responseDTOList = new ArrayList<>();
-
-        for(int i=0; i<reviewList.size(); i++) {
-            Review review = reviewList.get(i);
-            ReviewResponseDTO reviewResponseDTO = new ReviewResponseDTO();
-            ReviewResponseDTO responseDTO = ReviewResponseDTO.builder().review(review).build();
-            responseDTOList.add(i, responseDTO);
-        }
-
-        return responseDTOList;
-    }
-
-    // 좋아요순
-    public List<ReviewResponseDTO> postListView_likesNum() {
-        List<Review> reviewList = reviewRepository.findAllByOrderByLikesDesc();
-
-        List<ReviewResponseDTO> responseDTOList = new ArrayList<>();
-
-        for(int i=0; i<reviewList.size(); i++) {
-            Review review = reviewList.get(i);
-            ReviewResponseDTO reviewResponseDTO = new ReviewResponseDTO();
-            ReviewResponseDTO responseDTO = ReviewResponseDTO.builder().review(review).build();
-            responseDTOList.add(i, responseDTO);
-        }
-
-        return responseDTOList;
-    }
+//     조회수순
+//    public List<ReviewResponseDTO> postListView_viewNum() {
+//        List<Review> reviewList = reviewRepository.findAllByOrderByView_numDesc();
+//
+//        List<ReviewResponseDTO> responseDTOList = new ArrayList<>();
+//
+//        for(int i=0; i<reviewList.size(); i++) {
+//            Review review = reviewList.get(i);
+//            ReviewResponseDTO reviewResponseDTO = new ReviewResponseDTO();
+//            ReviewResponseDTO responseDTO = ReviewResponseDTO.builder().review(review).build();
+//            responseDTOList.add(i, responseDTO);
+//        }
+//
+//        return responseDTOList;
+//    }
+//
+//     좋아요순
+//    public List<ReviewResponseDTO> postListView_likesNum() {
+//        List<Review> reviewList = reviewRepository.findAllByOrderByLikes_numDesc();
+//
+//        List<ReviewResponseDTO> responseDTOList = new ArrayList<>();
+//
+//        for(int i=0; i<reviewList.size(); i++) {
+//            Review review = reviewList.get(i);
+//            ReviewResponseDTO reviewResponseDTO = new ReviewResponseDTO();
+//            ReviewResponseDTO responseDTO = ReviewResponseDTO.builder().review(review).build();
+//            responseDTOList.add(i, responseDTO);
+//        }
+//
+//        return responseDTOList;
+//    }
 
     // 키워드 검색
     public List<ReviewResponseDTO> search(String keyword) {

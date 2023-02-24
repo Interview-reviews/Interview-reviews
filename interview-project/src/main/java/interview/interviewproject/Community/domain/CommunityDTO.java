@@ -1,5 +1,6 @@
 package interview.interviewproject.Community.domain;
 
+import interview.interviewproject.Member.domain.CareerType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,11 +49,23 @@ public class CommunityDTO {
 
         private Integer likes;
 
+        private boolean isLiked;
+
         private Integer comments;
 
         private LocalDate createdAt;
 
         private List<CommunityTagDTO> communityTagList;
+
+        private List<CommunityCommentDTO> communityCommentList;
+
+        private CareerType careerType;
+
+        private boolean isOwner;
+
+        public void setOwner(boolean isOwner) {
+            this.isOwner = isOwner;
+        }
 
     }
 
