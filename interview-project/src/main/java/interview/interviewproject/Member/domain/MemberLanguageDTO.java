@@ -1,22 +1,25 @@
 package interview.interviewproject.Member.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@Getter
+
 public class MemberLanguageDTO {
 
-    private String language;
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Request{
 
-    private Long languageScore;
+        private String language;
 
-    public static MemberLanguage toEntity(Long id, MemberLanguageDTO languageDTO) {
-
-        return MemberLanguage.builder()
-                .id(id) // detail_id
-                .language(languageDTO.getLanguage())
-                .languageScore(languageDTO.getLanguageScore())
-                .build();
+        private Long languageScore;
     }
+
+
+
+
 }

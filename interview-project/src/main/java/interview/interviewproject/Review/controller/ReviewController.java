@@ -70,6 +70,7 @@ public class ReviewController {
         return responseDTOList;
     }
 
+    // 댓글 작성
     @PostMapping(value = "/{id}/comments")
     public void commentSave(@RequestBody ReviewCommentRequestDTO requestDTO, @RequestParam String nickname, @RequestParam Long post_id) {
         commentService.commentSave(nickname, post_id, requestDTO);

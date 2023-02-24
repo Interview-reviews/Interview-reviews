@@ -1,8 +1,8 @@
 package interview.interviewproject.Member.service;
 
 import interview.interviewproject.Member.domain.Member;
+import interview.interviewproject.Member.domain.MemberDTO;
 import interview.interviewproject.Member.domain.MemberDetail;
-import interview.interviewproject.Member.domain.MemberRequestDTO;
 import interview.interviewproject.Member.repository.MemberDetailRepository;
 import interview.interviewproject.Member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +26,8 @@ public class MemberService {
         return memberRepository.existsByUsername(username);
     }
 
-    public void join(MemberRequestDTO requestDTO) {
-        Member member = MemberRequestDTO.toEntity(requestDTO);
+    public void createMember(MemberDTO.Request request) {
+        Member member = Member.createMember(request);
         memberRepository.save(member);
     }
 }

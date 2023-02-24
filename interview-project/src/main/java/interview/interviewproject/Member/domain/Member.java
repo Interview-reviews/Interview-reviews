@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Member extends BaseTimeEntity {
 
     @Id
@@ -43,18 +45,20 @@ public class Member extends BaseTimeEntity {
     @Enumerated(value = EnumType.STRING)
     private GenderType gender;
 
-    private String role;
+    private String role; // USER, ADMIN
 
-    @Builder
-    public Member(String nickname, String username, String phoneNumber, String password, String email,
-                  LocalDate birthDate, GenderType gender, String role) {
-        this.nickname = nickname;
-        this.username = username;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.email = email;
-        this.birthDate = birthDate;
-        this.gender = gender;
-        this.role = role;
+    public static Member createMember(MemberDTO.Request request) {
+        return Member.builder()
+                .nickname(request.getNickname())
+                .username(request.getUsername())
+                .phoneNumber(request.getPhoneNumber())
+                .password(request.passwordEncode(request.getPassword()))
+                .email(request.getEmail())
+                .birthDate(request.getBirthDate())
+                .gender(request.getGender())
+                .role("USER")
+                .build();
     }
+
+
 }

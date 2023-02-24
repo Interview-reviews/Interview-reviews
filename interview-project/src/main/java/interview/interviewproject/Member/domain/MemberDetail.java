@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MemberDetail {
 
     @Id
@@ -38,20 +39,23 @@ public class MemberDetail {
     @JoinColumn(name = "nickname")
     private Member member;
 
-    @OneToMany
-    @JoinColumn(name = "language_id")
-    private List<MemberLanguage> memberLanguages = new ArrayList<>();
+//    @OneToMany
+//    @JoinColumn(name = "language_id")
+//    private List<MemberLanguage> memberLanguages;
 
-    @Builder
-    public MemberDetail(String graduate, String school, Double grades, String major, int intern, String job, Member member,CareerType careerType) {
-        this.graduate = graduate;
-        this.school = school;
-        this.grades = grades;
-        this.major = major;
-        this.intern = intern;
-        this.job = job;
-        this.member = member;
-        this.careerType = careerType;
+    public static MemberDetail createMemberDetail(MemberDetailDTO.Request request, Member member) {
+        return MemberDetail.builder()
+                .graduate(request.getGraduate())
+                .school(request.getSchool())
+                .grades(request.getGrades())
+                .major(request.getMajor())
+                .intern(request.getIntern())
+                .job(request.getJob())
+                .careerType(request.getCareerType())
+                .member(member)
+                .build();
     }
+
+
 
 }
