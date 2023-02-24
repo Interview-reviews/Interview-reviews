@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MemberFindPwDTO { // DTO로 변경예정
+public class MemberFindPwDTO {
 
     private String authPw;
     private String password;

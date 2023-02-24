@@ -1,6 +1,5 @@
 package interview.interviewproject.Member.repository;
 
-import interview.interviewproject.Member.domain.MemberDetailRequestDTO;
 import interview.interviewproject.Member.domain.MemberLanguage;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -3,7 +3,6 @@ package interview.interviewproject.Review.domain;
 
 import interview.interviewproject.Common.domain.BaseTimeEntity;
 import interview.interviewproject.Member.domain.Member;
-import interview.interviewproject.Member.domain.MemberRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
