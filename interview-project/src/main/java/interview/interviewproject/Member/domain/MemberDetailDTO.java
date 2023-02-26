@@ -15,8 +15,7 @@ public class MemberDetailDTO {
         @NoArgsConstructor
         @AllArgsConstructor
         public static class Request{
-                private Long detail_id;
-                private List<MemberLanguageDTO.Request> language;
+
                 private String graduate;
                 private String school;
                 private Double grades;
@@ -24,6 +23,7 @@ public class MemberDetailDTO {
                 private int intern;
                 private String job;
                 private CareerType careerType;
+                private List<MemberLanguageDTO.Request> language;
                 private Member member;
         }
 

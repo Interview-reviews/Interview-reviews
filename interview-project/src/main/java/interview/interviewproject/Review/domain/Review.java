@@ -47,10 +47,10 @@ public class Review extends BaseTimeEntity {
     private String contents;
 
     @Column(columnDefinition = "integer default 0", nullable = false)
-    private int view_num;
+    private int view;
 
     @Column(columnDefinition = "integer default 0", nullable = false)
-    private int likes_num;
+    private int likes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nickname")

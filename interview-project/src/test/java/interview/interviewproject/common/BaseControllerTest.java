@@ -67,6 +67,7 @@ public abstract class BaseControllerTest {
         createMember();
         Member login = Member.builder()
                 .username("kwon")
+                .nickname("test_nick")
                 .password("1234")
                 .build();
 

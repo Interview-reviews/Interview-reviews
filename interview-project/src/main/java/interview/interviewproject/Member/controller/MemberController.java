@@ -37,7 +37,7 @@ public class MemberController {
     }
 
     //회원가입-스펙정보
-    @PostMapping(value = "/detail")
+    @PostMapping(value = "/detail-join")
     public void create_detailMember(@RequestBody MemberDetailDTO.Request request, @RequestParam String nickname) {
         memberDetailService.join_detail(request, nickname);
     }

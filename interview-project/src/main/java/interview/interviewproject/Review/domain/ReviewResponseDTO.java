@@ -23,7 +23,7 @@ public class ReviewResponseDTO {
     private int likes_num;
 
     private Boolean user_flag; //작성자가 맞는지 확인
-    private List<ReviewCommentResponseDTO> commentResponseDTOList;
+    private List<ReviewCommentDTO.Response> commentResponseDTOList;
     private Boolean like_flag; // 작성자가 좋아요 여부
 
     @Builder
@@ -37,7 +37,7 @@ public class ReviewResponseDTO {
         this.passingStatus = review.getPassingStatus();
         this.title = review.getTitle();
         this.contents = review.getContents();
-        this.view_num = review.getView_num();
-        this.likes_num = review.getLikes_num();
+        this.view_num = review.getView();
+        this.likes_num = review.getLikes();
     }
 }

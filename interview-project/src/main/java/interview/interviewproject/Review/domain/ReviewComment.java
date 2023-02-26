@@ -25,14 +25,6 @@ public class ReviewComment extends BaseTimeEntity{
     @Column(nullable = false)
     private String comment; // 댓글 내용
 
-//    @Column(name = "created_date")
-//    @CreatedDate
-//    private String createdDate;
-//
-//    @Column(name = "modified_date")
-//    @LastModifiedDate
-//    private String modifiedDate;
-
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Review review;
@@ -41,6 +33,13 @@ public class ReviewComment extends BaseTimeEntity{
     @JoinColumn(name = "nickname")
     private Member member;
 
+    public static ReviewComment createComment(ReviewCommentDTO.Request request, Review review, Member member) {
+        return ReviewComment.builder()
+                .comment(request.getComment())
+                .member(member)
+                .review(review)
+                .build();
+    }
 
 
 }

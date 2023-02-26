@@ -1,8 +1,6 @@
 package interview.interviewproject.Review.controller;
 
-import interview.interviewproject.Common.annotation.LoginMember;
-import interview.interviewproject.Member.domain.Member;
-import interview.interviewproject.Review.domain.ReviewCommentRequestDTO;
+import interview.interviewproject.Review.domain.ReviewCommentDTO;
 import interview.interviewproject.Review.domain.ReviewRequestDTO;
 import interview.interviewproject.Review.domain.ReviewResponseDTO;
 import interview.interviewproject.Review.service.ReviewCommentService;
@@ -71,8 +69,8 @@ public class ReviewController {
     }
 
     // 댓글 작성
-    @PostMapping(value = "/{id}/comments")
-    public void commentSave(@RequestBody ReviewCommentRequestDTO requestDTO, @RequestParam String nickname, @RequestParam Long post_id) {
+    @PostMapping(value = "/comments")
+    public void commentSave(@RequestBody ReviewCommentDTO requestDTO, @RequestParam String nickname, @RequestParam Long post_id) {
         commentService.commentSave(nickname, post_id, requestDTO);
     }
 
