@@ -23,9 +23,9 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "detail_id")
-    private MemberDetail memberDetail;
+//    @OneToOne
+//    @JoinColumn(name = "detail_id")
+//    private MemberDetail memberDetail;
 
     private String nickname;
 

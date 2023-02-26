@@ -124,6 +124,7 @@ public class CommunityControllerTest extends BaseControllerTest {
         communityTagList.add(CommunityTagDTO.builder().tagName("테스트 태그1").build());
         communityTagList.add(CommunityTagDTO.builder().tagName("테스트 태그2").build());
 
+
         CommunityDTO.Request request = CommunityDTO.Request.builder()
                 .title("테스트 제목")
                 .contents("테스트 내용")
