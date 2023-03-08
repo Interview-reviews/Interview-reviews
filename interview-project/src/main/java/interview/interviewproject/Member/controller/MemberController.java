@@ -19,7 +19,7 @@ public class MemberController {
     private final EmailService emailService;
 
     //닉네임 중복확인
-    @GetMapping(value = "/check-nickname")
+    @PostMapping(value = "/check-nickname")
     public boolean checkNickname(@RequestParam String nickname) {
         //중복시에 false 로 반환
         return !memberService.nicknameCheck(nickname);
