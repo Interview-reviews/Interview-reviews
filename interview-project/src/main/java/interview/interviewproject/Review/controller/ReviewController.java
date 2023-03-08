@@ -69,8 +69,8 @@ public class ReviewController {
 
     // 댓글 작성
     @PostMapping(value = "/comments")
-    public void commentSave(@RequestBody ReviewCommentDTO requestDTO, @RequestParam String nickname, @RequestParam Long post_id) {
-        commentService.commentSave(nickname, post_id, requestDTO);
+    public void commentSave(@RequestBody ReviewCommentDTO.Request request, @RequestParam String nickname, @RequestParam Long post_id) {
+        commentService.commentSave(nickname, post_id, request);
     }
 
 

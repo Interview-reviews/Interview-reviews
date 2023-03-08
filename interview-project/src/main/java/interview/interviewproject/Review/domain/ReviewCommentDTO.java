@@ -7,6 +7,7 @@ public class ReviewCommentDTO {
 
     @Builder
     @Getter
+    @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Request {

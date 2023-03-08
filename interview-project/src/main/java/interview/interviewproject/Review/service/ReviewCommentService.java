@@ -20,15 +20,15 @@ public class ReviewCommentService {
     private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
 
-    public void commentSave(String nickname, Long id, ReviewCommentDTO requestDTO) {
+    public void commentSave(String nickname, Long id, ReviewCommentDTO.Request request) {
         Member member = memberRepository.findByNickname(nickname);
         Optional<Review> byId = reviewRepository.findById(id);
         Review review = byId.get();
 
-        requestDTO.setMember(member);
-        requestDTO.setReview(review);
+//        request.setReview(review);
+//        request.setMember(member);
 
-        ReviewComment comment = requestDTO.toEntity(requestDTO);
+        ReviewComment comment = ReviewComment.createComment(request, review, member);
         commentRepository.save(comment);
 
     }
