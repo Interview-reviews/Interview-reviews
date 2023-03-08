@@ -30,9 +30,9 @@ public class WebConfig {
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         configuration.setAllowCredentials(true);
+        configuration.addAllowedHeader("Authorization");
         configuration.addExposedHeader("Authorization");
-        configuration.addExposedHeader("refreshToken");
-        configuration.setMaxAge(7200L);
+        configuration.addExposedHeader("*");
 
         source.registerCorsConfiguration("/**", configuration);
         return new CorsFilter(source);
