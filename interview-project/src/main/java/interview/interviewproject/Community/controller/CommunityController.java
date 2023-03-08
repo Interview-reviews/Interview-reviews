@@ -1,9 +1,7 @@
 package interview.interviewproject.Community.controller;
 
-import interview.interviewproject.Common.annotation.LoginMember;
+import interview.interviewproject.Common.auth.annotation.LoginMember;
 import interview.interviewproject.Community.domain.CommunityDTO;
-import interview.interviewproject.Community.domain.CommunityTag;
-import interview.interviewproject.Community.domain.CommunityTagDTO;
 import interview.interviewproject.Community.service.CommunityService;
 import interview.interviewproject.Member.domain.Member;
 import lombok.RequiredArgsConstructor;

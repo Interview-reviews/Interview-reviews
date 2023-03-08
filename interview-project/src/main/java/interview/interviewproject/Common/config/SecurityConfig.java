@@ -37,8 +37,8 @@ public class SecurityConfig {
                 .and()
                 .apply(new MyCustomDsl())
                 .and()
-                .cors()
-                .and()
+//                .cors()
+//                .and()
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests(authroize -> authroize

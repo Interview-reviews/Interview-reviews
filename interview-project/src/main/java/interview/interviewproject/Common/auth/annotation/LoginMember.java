@@ -1,4 +1,4 @@
-package interview.interviewproject.Common.annotation;
+package interview.interviewproject.Common.auth.annotation;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
