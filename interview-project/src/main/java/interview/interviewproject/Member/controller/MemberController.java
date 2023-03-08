@@ -19,8 +19,8 @@ public class MemberController {
     private final EmailService emailService;
 
     //닉네임 중복확인
-    @PostMapping(value = "/check-nickname")
-    public boolean checkNickname(@RequestParam String nickname) {
+    @PostMapping(value = "/check-nickname/{nickname}")
+    public boolean checkNickname(@PathVariable String nickname) {
         //중복시에 false 로 반환
 //        return !memberService.nicknameCheck(nickname);
         return true;
