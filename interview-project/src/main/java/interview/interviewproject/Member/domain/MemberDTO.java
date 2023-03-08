@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 public class MemberDTO {
 
-        @Builder
         @Getter
         @NoArgsConstructor
         @AllArgsConstructor

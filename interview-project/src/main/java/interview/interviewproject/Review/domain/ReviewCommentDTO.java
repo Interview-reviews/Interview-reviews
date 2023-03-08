@@ -3,9 +3,6 @@ package interview.interviewproject.Review.domain;
 import interview.interviewproject.Member.domain.Member;
 import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ReviewCommentDTO {
 
     @Builder
