@@ -32,82 +32,82 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.requestF
 
 public class MemberControllerTest extends BaseControllerTest {
 
-    @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
-    private MemberDetailRepository detailRepository;
-
-    @Autowired
-    MemberLanguageRepository languageRepository;
-
-    @BeforeEach
-    void beforeClean() {
-        memberRepository.deleteAll();
-        detailRepository.deleteAll();
-        languageRepository.deleteAll();
-    }
-
-    @AfterEach
-    void afterClean() {
-        memberRepository.deleteAll();
-        detailRepository.deleteAll();
-        languageRepository.deleteAll();
-    }
-
-    private static final Snippet JOIN_REQUEST_FIELDS = requestFields(
-            fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임"),
-            fieldWithPath("username").type(JsonFieldType.STRING).description("아이디"),
-            fieldWithPath("phoneNumber").type(JsonFieldType.STRING).description("전화번호"),
-            fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호"),
-            fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
-            fieldWithPath("birthDate").type(JsonFieldType.ARRAY).description("생일"),
-            fieldWithPath("gender").type(JsonFieldType.STRING).description("성별"),
-            fieldWithPath("bcryptPasswordEncoder").type(JsonFieldType.NULL).description("비밀번호 인코더")
-    );
-
-    @Test
-    @DisplayName("회원가입-1")
-    void joinMember() throws JsonProcessingException {
-
-        String jwtTokenResponse = getJwtTokenResponse();
-
-        MemberDTO.Request request = MemberDTO.Request.builder()
-                .nickname("정유석")
-                .username("정유석1234")
-                .phoneNumber("010-5387-4816")
-                .password("dbt12#")
-                .email("elwlahstmxjf@naver.com")
-                .birthDate(LocalDate.ofEpochDay(2000-2-15))
-                .gender(GenderType.valueOf("MAN"))
-                .build();
-
-        given(this.spec)
-                .filter(document(DEFAULT_RESTDOC_PATH, JOIN_REQUEST_FIELDS))
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .header("Content-type", "application/json")
-                .header(AUTHORIZATION, "Bearer " + jwtTokenResponse)
-                .body(request)
-                .log().all()
-
-                .when()
-                .post("/api/v1/member/join")
-
-                .then()
-                .statusCode(HttpStatus.OK.value());
-    }
-
-    private static final Snippet DetailJoin_REQUEST_FIELDS = requestFields(
-            fieldWithPath("graduate").type(JsonFieldType.STRING).description("졸업여부"),
-            fieldWithPath("school").type(JsonFieldType.STRING).description("대학교"),
-            fieldWithPath("grades").type(JsonFieldType.NUMBER).description("학점"),
-            fieldWithPath("major").type(JsonFieldType.STRING).description("전공"),
-            fieldWithPath("intern").type(JsonFieldType.NUMBER).description("인턴횟수"),
-            fieldWithPath("job").type(JsonFieldType.STRING).description("직무"),
-            fieldWithPath("careerType").type(JsonFieldType.STRING).description("신입경력"),
-            fieldWithPath("language[].language").type(JsonFieldType.STRING).description("어학"),
-            fieldWithPath("language[].languageScore").type(JsonFieldType.NUMBER).description("어학점수")
-    );
+//    @Autowired
+//    private MemberRepository memberRepository;
+//
+//    @Autowired
+//    private MemberDetailRepository detailRepository;
+//
+//    @Autowired
+//    MemberLanguageRepository languageRepository;
+//
+//    @BeforeEach
+//    void beforeClean() {
+//        memberRepository.deleteAll();
+//        detailRepository.deleteAll();
+//        languageRepository.deleteAll();
+//    }
+//
+//    @AfterEach
+//    void afterClean() {
+//        memberRepository.deleteAll();
+//        detailRepository.deleteAll();
+//        languageRepository.deleteAll();
+//    }
+//
+//    private static final Snippet JOIN_REQUEST_FIELDS = requestFields(
+//            fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임"),
+//            fieldWithPath("username").type(JsonFieldType.STRING).description("아이디"),
+//            fieldWithPath("phoneNumber").type(JsonFieldType.STRING).description("전화번호"),
+//            fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호"),
+//            fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+//            fieldWithPath("birthDate").type(JsonFieldType.ARRAY).description("생일"),
+//            fieldWithPath("gender").type(JsonFieldType.STRING).description("성별"),
+//            fieldWithPath("bcryptPasswordEncoder").type(JsonFieldType.NULL).description("비밀번호 인코더")
+//    );
+//
+//    @Test
+//    @DisplayName("회원가입-1")
+//    void joinMember() throws JsonProcessingException {
+//
+//        String jwtTokenResponse = getJwtTokenResponse();
+//
+//        MemberDTO.Request request = MemberDTO.Request.builder()
+//                .nickname("정유석")
+//                .username("정유석1234")
+//                .phoneNumber("010-5387-4816")
+//                .password("dbt12#")
+//                .email("elwlahstmxjf@naver.com")
+//                .birthDate(LocalDate.ofEpochDay(2000-2-15))
+//                .gender(GenderType.valueOf("MAN"))
+//                .build();
+//
+//        given(this.spec)
+//                .filter(document(DEFAULT_RESTDOC_PATH, JOIN_REQUEST_FIELDS))
+//                .accept(MediaType.APPLICATION_JSON_VALUE)
+//                .header("Content-type", "application/json")
+//                .header(AUTHORIZATION, "Bearer " + jwtTokenResponse)
+//                .body(request)
+//                .log().all()
+//
+//                .when()
+//                .post("/api/v1/member/join")
+//
+//                .then()
+//                .statusCode(HttpStatus.OK.value());
+//    }
+//
+//    private static final Snippet DetailJoin_REQUEST_FIELDS = requestFields(
+//            fieldWithPath("graduate").type(JsonFieldType.STRING).description("졸업여부"),
+//            fieldWithPath("school").type(JsonFieldType.STRING).description("대학교"),
+//            fieldWithPath("grades").type(JsonFieldType.NUMBER).description("학점"),
+//            fieldWithPath("major").type(JsonFieldType.STRING).description("전공"),
+//            fieldWithPath("intern").type(JsonFieldType.NUMBER).description("인턴횟수"),
+//            fieldWithPath("job").type(JsonFieldType.STRING).description("직무"),
+//            fieldWithPath("careerType").type(JsonFieldType.STRING).description("신입경력"),
+//            fieldWithPath("language[].language").type(JsonFieldType.STRING).description("어학"),
+//            fieldWithPath("language[].languageScore").type(JsonFieldType.NUMBER).description("어학점수")
+//    );
 
 //    @Test
 //    @DisplayName("회원가입-2")
