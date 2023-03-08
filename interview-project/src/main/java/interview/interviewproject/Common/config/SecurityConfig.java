@@ -31,10 +31,10 @@ public class SecurityConfig {
 
 //    private final CorsConfig corsConfig;
 
-    @Autowired
-    MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
-    private final WebConfig webConfig;
+    @Autowired
+    private WebConfig webConfig;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
