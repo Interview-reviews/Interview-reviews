@@ -63,7 +63,7 @@ public class MemberController {
     }
 
     @GetMapping("/test")
-    public String test(){
-        return "tester";
+    public MemberFindPwDTO test(){
+        return new MemberFindPwDTO("yuseok0215", "yuseok");
     }
 }
