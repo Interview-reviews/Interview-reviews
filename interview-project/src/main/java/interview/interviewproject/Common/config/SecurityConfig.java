@@ -33,8 +33,7 @@ public class SecurityConfig {
 
     private final MemberRepository memberRepository;
 
-//    @Autowired
-//    private WebConfig webConfig;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
