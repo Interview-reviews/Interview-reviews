@@ -3,10 +3,13 @@ package interview.interviewproject.Common.config;
 import interview.interviewproject.Common.filter.JwtAuthenticationFilter;
 import interview.interviewproject.Common.filter.JwtAuthorizationFilter;
 import interview.interviewproject.Member.repository.MemberRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -18,16 +21,21 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import javax.servlet.Filter;
 import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
 //    private final CorsConfig corsConfig;
 
     private final MemberRepository memberRepository;
+
+    @Autowired
+    private WebConfig webConfig;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
@@ -37,9 +45,9 @@ public class SecurityConfig {
                 .and()
                 .apply(new MyCustomDsl())
                 .and()
-                .cors()
-                .configurationSource(corsConfigurationSource())
-                .and()
+                .addFilter(webConfig.corsFilter())
+//                .configurationSource(corsConfigurationSource())
+
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests(authroize -> authroize
@@ -50,20 +58,20 @@ public class SecurityConfig {
     }
 
     //Cors 설정
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.addAllowedOrigin("*");
-        configuration.addAllowedHeader("*");
-        configuration.addAllowedMethod("*");
-//        configuration.setAllowCredentials(true);
-        configuration.setMaxAge(7200L);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//
+//        configuration.addAllowedOrigin("*");
+//        configuration.addAllowedHeader("*");
+//        configuration.addAllowedMethod("*");
+////        configuration.setAllowCredentials(true);
+//        configuration.setMaxAge(7200L);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 
     public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
         @Override
