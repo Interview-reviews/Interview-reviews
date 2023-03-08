@@ -37,8 +37,8 @@ public class SecurityConfig {
                 .and()
                 .apply(new MyCustomDsl())
                 .and()
-//                .cors()
-//                .and()
+                .cors()
+                .and()
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests(authroize -> authroize
@@ -48,6 +48,20 @@ public class SecurityConfig {
         return http.build();
     }
 
+    //Cors 설정
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.addAllowedOrigin("*");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
     public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
         @Override
