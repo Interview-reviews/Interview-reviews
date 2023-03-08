@@ -22,7 +22,8 @@ public class MemberController {
     @PostMapping(value = "/check-nickname")
     public boolean checkNickname(@RequestParam String nickname) {
         //중복시에 false 로 반환
-        return !memberService.nicknameCheck(nickname);
+//        return !memberService.nicknameCheck(nickname);
+        return false;
     }
 
     // 아이디 중복확인
