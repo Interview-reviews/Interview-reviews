@@ -33,8 +33,8 @@ public class SecurityConfig {
 
     private final MemberRepository memberRepository;
 
-    @Autowired
-    private WebConfig webConfig;
+//    @Autowired
+//    private WebConfig webConfig;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .and()
                 .apply(new MyCustomDsl())
                 .and()
-                .addFilter(webConfig.corsFilter())
+//                .addFilter(webConfig.corsFilter())
 //                .configurationSource(corsConfigurationSource())
 
                 .formLogin().disable()
