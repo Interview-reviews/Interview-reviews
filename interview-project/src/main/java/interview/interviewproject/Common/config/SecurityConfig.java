@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .apply(new MyCustomDsl())
                 .and()
                 .cors()
+                .configurationSource(corsConfigurationSource())
                 .and()
                 .formLogin().disable()
                 .httpBasic().disable()
@@ -56,7 +57,8 @@ public class SecurityConfig {
         configuration.addAllowedOrigin("*");
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
-        configuration.setAllowCredentials(true);
+//        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(7200L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
