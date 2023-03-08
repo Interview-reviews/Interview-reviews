@@ -62,8 +62,8 @@ public class MemberController {
         return emailService.findPw(email);
     }
 
-    @GetMapping("/test")
-    public String test(){
-        return "test";
-    }
+//    @GetMapping("/test")
+//    public String test(){
+//        return "test";
+//    }
 }
