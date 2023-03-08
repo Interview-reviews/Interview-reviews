@@ -22,12 +22,12 @@ public class ReviewService {
     private final ReviewCommentRepository commentRepository;
     private final LikeRepository likeRepository;
 
-    public void createPost(ReviewRequestDTO requestDTO) {
-        Review review = requestDTO.toEntity(requestDTO);
+    public void createPost(ReviewDTO.Request request) {
+        Review review = Review.createReview(request);
         reviewRepository.save(review);
     }
 
-    public void updatePost(ReviewRequestDTO requestDTO, Long id) {
+    public void updatePost(ReviewDTO.Request requestDTO, Long id) {
         Optional<Review> byId = reviewRepository.findById(id);
         Review review = byId.get();
         review.Update(requestDTO);
@@ -35,13 +35,13 @@ public class ReviewService {
     }
 
     // 상세페이지
-    public ReviewResponseDTO detailPage(long post_id, String nickname) {
+    public ReviewDTO.Response detailPage(long post_id, String nickname) {
         reviewRepository.updateView(post_id);
         
         Optional<Review> post = reviewRepository.findById(post_id);
         Review review = post.get();
         String post_nickname = review.getMember().getNickname();
-        ReviewResponseDTO reviewResponseDTO = new ReviewResponseDTO();
+        ReviewDTO.Response reviewResponseDTO = new ReviewDTO.Response();
 
         if(post_nickname.equals(nickname)) {
             reviewResponseDTO.setUser_flag(Boolean.TRUE);
@@ -58,20 +58,20 @@ public class ReviewService {
         }
 
         List<ReviewComment> reviewCommentList = commentRepository.findByReview(post_id);
-        List<ReviewCommentResponseDTO> commentResponseDTOList = new ArrayList<>();
+        List<ReviewCommentDTO.Response> ResponseDTOList = new ArrayList<>();
 
         for(int i=0; i<reviewCommentList.size(); i++) {
             String comment = reviewCommentList.get(i).getComment();
             String nickname1 = reviewCommentList.get(i).getMember().getNickname();
-            ReviewCommentResponseDTO reviewCommentResponseDTO = new ReviewCommentResponseDTO();
-            reviewCommentResponseDTO.setComments(comment);
-            reviewCommentResponseDTO.setNickname(nickname1);
-            commentResponseDTOList.add(reviewCommentResponseDTO);
+            ReviewCommentDTO.Response ResponseDTO = new ReviewCommentDTO.Response();
+            ResponseDTO.setComments(comment);
+            ResponseDTO.setNickname(nickname1);
+            ResponseDTOList.add(ResponseDTO);
         }
 
-        reviewResponseDTO.setCommentResponseDTOList(commentResponseDTOList);
+        reviewResponseDTO.setCommentResponseDTOList(ResponseDTOList);
 
-        return ReviewResponseDTO.builder().review(review).build();
+        return reviewResponseDTO;
     }
 
     // 상세페이지에 들어올때 좋아요가 해당 사용자가 좋아요를 눌렀는지
@@ -108,21 +108,21 @@ public class ReviewService {
         }
     }
 
-    // 최신순
-    public List<ReviewResponseDTO> postListView() {
-        List<Review> reviewList = reviewRepository.findAll();
-
-        List<ReviewResponseDTO> responseDTOList = new ArrayList<>();
-
-        for(int i=0; i<reviewList.size(); i++) {
-            Review review = reviewList.get(i);
-            ReviewResponseDTO reviewResponseDTO = new ReviewResponseDTO();
-            ReviewResponseDTO responseDTO = ReviewResponseDTO.builder().review(review).build();
-            responseDTOList.add(i, responseDTO);
-        }
-
-        return responseDTOList;
-    }
+//    // 최신순
+//    public List<ReviewDTO.Response> postListView() {
+//        List<Review> reviewList = reviewRepository.findAll();
+//
+//        List<ReviewDTO.Response> responseDTOList = new ArrayList<>();
+//
+//        for(int i=0; i<reviewList.size(); i++) {
+//            Review review = reviewList.get(i);
+//            ReviewDTO.Response reviewResponseDTO = new ReviewDTO.Response();
+////            ReviewDTO.Response responseDTO = ReviewDTO.Response.builder().review(review).build();
+//            responseDTOList.add(i, responseDTO);
+//        }
+//
+//        return responseDTOList;
+//    }
 
 //     조회수순
 //    public List<ReviewResponseDTO> postListView_viewNum() {
@@ -157,15 +157,27 @@ public class ReviewService {
 //    }
 
     // 키워드 검색
-    public List<ReviewResponseDTO> search(String keyword) {
+    public List<ReviewDTO.Response> search(String keyword) {
         List<Review> reviewList = reviewRepository.findByTitleContaining(keyword);
 
-        List<ReviewResponseDTO> responseDTOList = new ArrayList<>();
+        List<ReviewDTO.Response> responseDTOList = new ArrayList<>();
 
         for(int i=0; i<reviewList.size(); i++) {
             Review review = reviewList.get(i);
-            ReviewResponseDTO reviewResponseDTO = new ReviewResponseDTO();
-            ReviewResponseDTO responseDTO = ReviewResponseDTO.builder().review(review).build();
+            ReviewDTO.Response reviewResponseDTO = new ReviewDTO.Response();
+            ReviewDTO.Response responseDTO = ReviewDTO.Response.builder()
+                    .company(review.getCompany())
+                    .companyJob(review.getCompanyJob())
+                    .supportDate(review.getSupportDate())
+                    .interviewType(review.getInterviewType())
+                    .careerType(review.getCareerType())
+                    .interviewLevel(review.getInterviewLevel())
+                    .passingStatus(review.getPassingStatus())
+                    .title(review.getTitle())
+                    .contents(review.getContents())
+                    .view_num(review.getView())
+                    .likes_num(review.getLikes())
+                    .build();
             responseDTOList.add(i, responseDTO);
         }
 

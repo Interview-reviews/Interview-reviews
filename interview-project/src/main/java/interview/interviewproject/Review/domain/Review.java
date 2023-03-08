@@ -59,16 +59,30 @@ public class Review extends BaseTimeEntity {
     @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("id asc") // 댓글 정렬
     private List<ReviewComment> comments;
+    
+    public static Review createReview(ReviewDTO.Request request) {
+        return Review.builder()
+                .company(request.getCompany())
+                .companyJob(request.getCompanyJob())
+                .supportDate(request.getSupportDate())
+                .interviewType(request.getInterviewType())
+                .careerType(request.getCareerType())
+                .interviewLevel(request.getInterviewLevel())
+                .passingStatus(request.getPassingStatus())
+                .title(request.getTitle())
+                .contents(request.getContents())
+                .build();
+    }
 
-    public void Update(ReviewRequestDTO requestDTO) {
-        this.company = requestDTO.getCompany();
-        this.companyJob = requestDTO.getCompanyJob();
-        this.supportDate = requestDTO.getSupportDate();
-        this.interviewType = requestDTO.getInterviewType();
-        this.careerType = requestDTO.getCareerType();
-        this.interviewLevel = requestDTO.getInterviewLevel();
-        this.passingStatus = requestDTO.getPassingStatus();
-        this.title = requestDTO.getTitle();
-        this.contents = requestDTO.getContents();
+    public void Update(ReviewDTO.Request request) {
+        this.company = request.getCompany();
+        this.companyJob = request.getCompanyJob();
+        this.supportDate = request.getSupportDate();
+        this.interviewType = request.getInterviewType();
+        this.careerType = request.getCareerType();
+        this.interviewLevel = request.getInterviewLevel();
+        this.passingStatus = request.getPassingStatus();
+        this.title = request.getTitle();
+        this.contents = request.getContents();
     }
 }

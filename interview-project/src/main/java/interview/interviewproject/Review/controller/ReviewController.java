@@ -1,8 +1,7 @@
 package interview.interviewproject.Review.controller;
 
 import interview.interviewproject.Review.domain.ReviewCommentDTO;
-import interview.interviewproject.Review.domain.ReviewRequestDTO;
-import interview.interviewproject.Review.domain.ReviewResponseDTO;
+import interview.interviewproject.Review.domain.ReviewDTO;
 import interview.interviewproject.Review.service.ReviewCommentService;
 import interview.interviewproject.Review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -20,19 +19,19 @@ public class ReviewController {
 
     // 후기글 게시
     @PostMapping(value = "")
-    public void createPost(@RequestBody ReviewRequestDTO requestDTO) {
-        reviewService.createPost(requestDTO);
+    public void createPost(@RequestBody ReviewDTO.Request request) {
+        reviewService.createPost(request);
     }
 
     // 후기글 수정
     @PatchMapping(value = "")
-    public void updatePost(@RequestBody ReviewRequestDTO requestDTO, Long id) { reviewService.updatePost(requestDTO, id);}
+    public void updatePost(@RequestBody ReviewDTO.Request request, Long id) { reviewService.updatePost(request, id);}
 
     // 후기글 상세페이지
     @GetMapping(value = "/detail") // 작성자가 맞을 시에 True 보내기
-    public ReviewResponseDTO detailPage(Long post_id, String nickname) {
-        ReviewResponseDTO reviewResponseDTO = reviewService.detailPage(post_id, nickname);
-        return reviewResponseDTO;
+    public ReviewDTO.Response detailPage(Long post_id, String nickname) {
+        ReviewDTO.Response responseDTO = reviewService.detailPage(post_id, nickname);
+        return responseDTO;
     }
 
     // 후기글 상세페이지에서 좋아요 기능
@@ -42,12 +41,12 @@ public class ReviewController {
         return post_like;
     }
 
-    // 후기글 리스트뷰(최신순)
-    @GetMapping(value = "/post-listview")
-    public List<ReviewResponseDTO> postListView() {
-        List<ReviewResponseDTO> responseDTOList = reviewService.postListView();
-        return responseDTOList;
-    }
+//    // 후기글 리스트뷰(최신순)
+//    @GetMapping(value = "/post-listview")
+//        public List<ReviewDTO.Response> postListView() {
+//        List<ReviewDTO.Response> responseDTOList = reviewService.postListView();
+//        return responseDTOList;
+//    }
 
 //     후기글 리스트뷰(조회수순)
 //    public List<ReviewResponseDTO> postListView_viewNum() {
@@ -63,8 +62,8 @@ public class ReviewController {
 
     // 후기글 키워드 검색
     @GetMapping(value = "/keyword")
-    public List<ReviewResponseDTO> keywordSearch(@RequestParam String keyword) {
-        List<ReviewResponseDTO> responseDTOList = reviewService.search(keyword);
+    public List<ReviewDTO.Response> keywordSearch(@RequestParam String keyword) {
+        List<ReviewDTO.Response> responseDTOList = reviewService.search(keyword);
         return responseDTOList;
     }
 
